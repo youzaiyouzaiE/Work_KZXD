@@ -1,0 +1,35 @@
+//
+//  ShantouMuseum.pch
+//  ShantouMuseum
+//
+//  Created by jiahui on 15/5/5.
+//  Copyright (c) 2015年 Home. All rights reserved.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 7.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "AFNetworking.h"
+#import "MBProgressHUD.h"
+#import "AppData.h"
+#import "GlobalInstance.h"
+#import "Define.h"
+#import "AppDelegate.h"
+#import "UITools.h"
+#import "DataTools.h"
+#import "RequestWrapper.h"
+#endif
+
+#ifdef DEBUG
+#define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#define NSLog(...) {}
+
+
+#endif
