@@ -11,6 +11,8 @@
 #import "ChannelTree.h"
 #import "JSONKit.h"
 #import "WelcomeViewController.h"
+#import "Image.h"
+#import "ContentNode.h"
 
 @interface MainViewController () <CollectionViewDelegateTripletLayout,UICollectionViewDataSource,UICollectionViewDelegate,UIWebViewDelegate,wecomViewControllDelegate> {
     
@@ -88,7 +90,6 @@
 //                                        NSLog(@"what is node ??");
 //                                   
 //                               }
-                                NSLog(@"123344");
                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                    [self.controllerView reloadData];
                                });
@@ -158,6 +159,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    /////是叶节点的解析，不是叶节点的创建 径VC (truncalVC)
     ChannelTree *selectChannel = self.arrayCurrenTree[indexPath.row];
      NSLog(@"栏目 id:%@",selectChannel.id_string);
     if (selectChannel.isLeaf) {
@@ -174,9 +176,12 @@
     [self checkChannelContentFormServer:selectChannel.id_string];
 }
 
+
+#pragma mark -
 - (void)checkChannelContentFormServer:(NSString *)channelID
 {
-     NSLog(@"%@",REQUEST_CONTENT_URL_STR(channelID));
+    /////存到本地文件，本地没有再从服务器取出来
+    NSLog(@"%@",REQUEST_CONTENT_URL_STR(channelID));
     [RequestWrapper getRequestWithURL:REQUEST_CONTENT_URL_STR(channelID)
                        withParameters:nil
                               success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
@@ -188,6 +193,22 @@
                                   NSLog(@"fault");
                               }];
 }
+
+#pragma mark - 解析获取到的数据
+- (NSArray *)analysisDataFormJsonString:(NSString *)jsonStr {
+    NSMutableArray *objArray = [NSMutableArray array];
+    NSArray *arry = [jsonStr objectFromJSONString];
+    for (NSDictionary *dic in arry) {
+        ContentNode *node = [[ContentNode alloc] initWithDictionary:dic];
+        if ([dic objectForKey:@"img"]) {
+            NSArray *imgsArray = dic[@"img"];
+        }
+    }
+    return objArray;
+}
+
+
+
 
 /*
 #pragma mark - Navigation
