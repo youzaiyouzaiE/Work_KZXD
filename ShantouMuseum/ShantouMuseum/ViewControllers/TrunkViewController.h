@@ -10,4 +10,6 @@
 
 @interface TrunkViewController : UIViewController
 
+@property (strong, nonatomic) NSArray *arrayChannels;
+
 @end

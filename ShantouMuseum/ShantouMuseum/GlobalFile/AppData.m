@@ -7,6 +7,10 @@
 //
 
 #import "AppData.h"
+#import "ChannelTree.h"
+#import "ContentNode.h"
+#import "Image.h"
+
 
 @implementation AppData
 
@@ -72,6 +76,26 @@
             break;
     }
 }
+
+
+#pragma mark - 解析叶子的数据
+- (NSArray *)analysisDataFormJsonString:(NSString *)jsonStr {
+    NSMutableArray *objArray = [NSMutableArray array];
+    NSArray *arry = [jsonStr objectFromJSONString];
+    for (NSDictionary *dic in arry) {
+        ContentNode *node = [[ContentNode alloc] initWithDictionary:dic];
+        if ([dic objectForKey:@"img"]) {
+            NSArray *imgsArray = dic[@"img"];
+            for (NSDictionary *imgDic in imgsArray) {
+                Image *image = [[Image alloc] initWithDictionary:imgDic];
+                [node addImage:image];
+            }
+        }
+        [objArray addObject:node];
+    }
+    return objArray;
+}
+
 
 
 @end

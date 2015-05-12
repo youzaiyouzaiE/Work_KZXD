@@ -14,9 +14,12 @@
 #import "Image.h"
 #import "ContentNode.h"
 
+#import "TrunkViewController.h"
+#import "LeafListViewController.h"
+
 @interface MainViewController () <CollectionViewDelegateTripletLayout,UICollectionViewDataSource,UICollectionViewDelegate,UIWebViewDelegate,wecomViewControllDelegate> {
     
-    
+    ChannelTree *selectChannel;
 }
 
 @property (weak, nonatomic) IBOutlet UICollectionView *controllerView;
@@ -160,12 +163,14 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     /////是叶节点的解析，不是叶节点的创建 径VC (truncalVC)
-    ChannelTree *selectChannel = self.arrayCurrenTree[indexPath.row];
+    selectChannel = self.arrayCurrenTree[indexPath.row];
      NSLog(@"栏目 id:%@",selectChannel.id_string);
     if (selectChannel.isLeaf) {
          NSLog(@"是叶节点, 没有子栏目：%ld",selectChannel.children.count);
+        
     } else {
         NSLog(@"不是叶节点，有%ld个子节点",selectChannel.children.count);
+        
     }
     
     if (selectChannel.hasContent) {
@@ -173,7 +178,6 @@
     } else {
          NSLog(@"没有文章，要显示 txt, \ntext:%@",selectChannel.text);
     }
-    [self checkChannelContentFormServer:selectChannel.id_string];
 }
 
 
@@ -185,16 +189,15 @@
     [RequestWrapper getRequestWithURL:REQUEST_CONTENT_URL_STR(channelID)
                        withParameters:nil
                               success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-                                  NSTimeInterval delayTime = 0.5f;
                                   NSString *responsString = operation.responseString;
-                                  NSArray *arry = [responsString objectFromJSONString];
+                                  [self analysisDataFormJsonString:responsString];
                               }
                               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                  NSLog(@"fault");
+                                  NSLog(@"获取数据 fault");
                               }];
 }
 
-#pragma mark - 解析获取到的数据
+#pragma mark - 解析叶子的数据
 - (NSArray *)analysisDataFormJsonString:(NSString *)jsonStr {
     NSMutableArray *objArray = [NSMutableArray array];
     NSArray *arry = [jsonStr objectFromJSONString];
@@ -202,7 +205,12 @@
         ContentNode *node = [[ContentNode alloc] initWithDictionary:dic];
         if ([dic objectForKey:@"img"]) {
             NSArray *imgsArray = dic[@"img"];
+            for (NSDictionary *imgDic in imgsArray) {
+                Image *image = [[Image alloc] initWithDictionary:imgDic];
+                [node addImage:image];
+            }
         }
+        [objArray addObject:node];
     }
     return objArray;
 }
@@ -210,14 +218,14 @@
 
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+    
 }
-*/
+
 
 @end

@@ -1,23 +1,21 @@
 //
-//  TrunkViewController.m
+//  LeafListViewController.m
 //  ShantouMuseum
 //
-//  Created by jiahui on 15/5/11.
+//  Created by jiahui on 15/5/12.
 //  Copyright (c) 2015年 Home. All rights reserved.
 //
 
-#import "TrunkViewController.h"
-#import "ChannelTree.h"
+#import "LeafListViewController.h"
 
-
-@interface TrunkViewController ()<UITableViewDataSource, UITableViewDelegate> {
-    
+@interface LeafListViewController ()<UITableViewDataSource, UITableViewDelegate> {
+    BOOL isHasImage;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
-@implementation TrunkViewController
+@implementation LeafListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,13 +27,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
 #pragma mark - UItableDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_arrayChannels count];
+    return [_arrayContents count];
 }
 
 
@@ -45,8 +45,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *cellIdentifier = @"onlyLabelsCell";
-
+    NSString *cellIdentifier = nil;
+    if (isHasImage) {
+        cellIdentifier = @"imageAndLabelCell";
+    } else {
+        cellIdentifier = @"onlyLabelsCell";
+    }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
@@ -55,7 +59,6 @@
     return cell;
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -63,6 +66,6 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
 
 @end

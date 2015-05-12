@@ -30,10 +30,13 @@ typedef NS_ENUM(NSUInteger, SystemVersion) {
 
 
 + (instancetype)sharedInstance;
+
 - (void)getDefaultData;
-@property (copy, nonatomic) NSString *puserID;
 
 @property (nonatomic) DeviceScreenSize deviceSize;
 @property (nonatomic) SystemVersion systemVersion;
+
+
+
 
 @end
