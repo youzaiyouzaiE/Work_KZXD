@@ -68,7 +68,7 @@
                     <connections>
                         <outlet property="controllerView" destination="EHc-Kk-aHX" id="gfQ-FO-xvu"/>
                         <segue destination="07U-8N-RZN" kind="push" identifier="MainPushToTrunkVC" id="isb-zv-O2G"/>
-                        <segue destination="i4G-ls-MM1" kind="push" identifier="MainPushToLeafView" id="9JB-6C-qHj"/>
+                        <segue destination="i4G-ls-MM1" kind="push" identifier="MainPushToLeafVC" id="9JB-6C-qHj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -84,11 +84,11 @@
                         <viewControllerLayoutGuide type="bottom" id="eMz-nj-8yl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8JU-Q2-Qat">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0rn-c1-Ryq">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="62" id="Xez-BD-R7m">
@@ -120,6 +120,7 @@
                             <constraint firstAttribute="trailing" secondItem="0rn-c1-Ryq" secondAttribute="trailing" id="SN5-Oo-l7O"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="hpk-sg-iQP"/>
                     <connections>
                         <outlet property="tableView" destination="0rn-c1-Ryq" id="vdn-FZ-nLN"/>
@@ -138,11 +139,11 @@
                         <viewControllerLayoutGuide type="bottom" id="t1A-Pr-cnE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cEN-1x-z3h">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7cQ-BP-A8Q">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="69" id="VuE-bi-zOi">
@@ -174,6 +175,7 @@
                             <constraint firstItem="7cQ-BP-A8Q" firstAttribute="top" secondItem="jPv-jv-TAk" secondAttribute="bottom" id="zpL-H4-cb6"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="I80-85-PV9"/>
                     <connections>
                         <outlet property="tableView" destination="7cQ-BP-A8Q" id="05Q-GU-jhn"/>
@@ -194,11 +196,11 @@
                         <viewControllerLayoutGuide type="bottom" id="i45-c9-iaA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jqS-Hi-4Ik">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0A4-4r-fa1">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="6f3-72-XRh" id="VFL-Uk-mVl"/>
@@ -214,6 +216,7 @@
                             <constraint firstItem="i45-c9-iaA" firstAttribute="top" secondItem="0A4-4r-fa1" secondAttribute="bottom" id="qFd-Pr-5IC"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="RhN-Lh-idF"/>
                     <connections>
                         <segue destination="i4G-ls-MM1" kind="push" identifier="ChildPushToLeafVC" id="jwI-2W-oti"/>
@@ -283,6 +286,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jwI-2W-oti"/>
+        <segue reference="9JB-6C-qHj"/>
     </inferredMetricsTieBreakers>
 </document>

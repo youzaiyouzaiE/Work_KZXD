@@ -49,7 +49,7 @@
                                   NSMutableArray *arrayCurren = fristChannel.children;
                                   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                       [self.delegate getDataFormServer:arrayCurren andFristNode:fristChannel];
-                                      [self.navigationController popViewControllerAnimated:YES];
+                                      [self.navigationController popViewControllerAnimated:NO];
                                   });
                                   
                               }

@@ -20,6 +20,7 @@
 @interface MainViewController () <CollectionViewDelegateTripletLayout,UICollectionViewDataSource,UICollectionViewDelegate,UIWebViewDelegate,wecomViewControllDelegate> {
     
     ChannelTree *selectChannel;
+    NSArray *arrayLeafs;
 }
 
 @property (weak, nonatomic) IBOutlet UICollectionView *controllerView;
@@ -147,10 +148,12 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *reuseIdentifier = @"reuseIdentifierItem";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    if (SCREEN_W < 500) {///iPhone4 and 4s
-        
-    }
     UILabel *titleLable = (UILabel *)[cell viewWithTag:1];
+    if (SCREEN_H < 482) {///iPhone4 and 4s
+        titleLable.frame = CGRectMake(titleLable.frame.origin.x, titleLable.frame.origin.y, titleLable.frame.size.width - 5, titleLable.frame.size.height);
+        titleLable.font = [UIFont systemFontOfSize:12];
+    }
+   
     ChannelTree *node = self.arrayCurrenTree[indexPath.row];
     titleLable.text = node.name;
     return cell;
@@ -167,10 +170,11 @@
      NSLog(@"栏目 id:%@",selectChannel.id_string);
     if (selectChannel.isLeaf) {
          NSLog(@"是叶节点, 没有子栏目：%ld",selectChannel.children.count);
+        [self checkChannelContentFormServer:selectChannel.id_string];
         
     } else {
         NSLog(@"不是叶节点，有%ld个子节点",selectChannel.children.count);
-        
+        [self performSegueWithIdentifier:@"MainPushToTrunkVC" sender:self];
     }
     
     if (selectChannel.hasContent) {
@@ -190,7 +194,8 @@
                        withParameters:nil
                               success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
                                   NSString *responsString = operation.responseString;
-                                  [self analysisDataFormJsonString:responsString];
+                                 arrayLeafs = [self analysisDataFormJsonString:responsString];
+                                  [self performSegueWithIdentifier:@"MainPushToLeafVC" sender:self];
                               }
                               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                   NSLog(@"获取数据 fault");
@@ -215,15 +220,17 @@
     return objArray;
 }
 
-
-
-
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
+    if ([segue.identifier isEqualToString:@"MainPushToTrunkVC"]) {
+        TrunkViewController *trunkVC = (TrunkViewController *)segue.destinationViewController;
+        trunkVC.arrayChannels = selectChannel.children;
+    } else if ([segue.identifier isEqualToString:@"MainPushToLeafVC"]) {
+        LeafListViewController *leafVC = (LeafListViewController *)segue.destinationViewController;
+        leafVC.arrayContents = arrayLeafs;
+    }
     
 }
 

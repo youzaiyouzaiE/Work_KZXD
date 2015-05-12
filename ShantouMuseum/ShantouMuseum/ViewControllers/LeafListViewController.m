@@ -7,6 +7,7 @@
 //
 
 #import "LeafListViewController.h"
+#import "ContentNode.h"
 
 @interface LeafListViewController ()<UITableViewDataSource, UITableViewDelegate> {
     BOOL isHasImage;
@@ -55,12 +56,22 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    
+    ContentNode *currentNod = _arrayContents[indexPath.row];
+    cell.textLabel.text = currentNod.title;
+    if (currentNod.isImg) {
+        cell.imageView.backgroundColor = [UIColor yellowColor];
+    }
     return cell;
 }
 
-#pragma mark - Navigation
+#pragma mark - UItableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+}
 
+#pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].

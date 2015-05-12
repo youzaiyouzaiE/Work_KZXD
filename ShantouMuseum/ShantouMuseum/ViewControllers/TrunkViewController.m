@@ -9,7 +9,6 @@
 #import "TrunkViewController.h"
 #import "ChannelTree.h"
 
-
 @interface TrunkViewController ()<UITableViewDataSource, UITableViewDelegate> {
     
 }
@@ -51,8 +50,16 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    
+    ChannelTree *treeNode = _arrayChannels[indexPath.row];
+    cell.textLabel.text = treeNode.name;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ChannelTree *treeNode = _arrayChannels[indexPath.row];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
 }
 
 /*
