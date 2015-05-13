@@ -50,5 +50,6 @@ return shared##className;\
 #define REQUEST_CONTENT_URL_STR(channelID)     [NSString stringWithFormat:@"http://shantou.customs.gov.cn/Portals/151/guanshi/phone/channel/%@.html",channelID]
 #define IMAGE_ROAD_URL_STR(imageRod)           [NSString stringWithFormat:@"http://shantou.customs.gov.cn/Portals/151/guanshi%@",imageRod]
 
+#define LEAF_USER_DEFAULT(channelID)           [NSString stringWithFormat:@"leaf%@",channelID]
 
 #endif

@@ -22,6 +22,7 @@
         self.isImg = imgNum.boolValue;
         self.title = [dic objectForKey:@"title"];
         self.id_String = [dic objectForKey:@"id"];
+        self.txt = [dic objectForKey:@"txt"];
     }
     return self;
 }

@@ -11,12 +11,13 @@
 
 @interface ContentNode : NSObject
 
-@property (assign, nonatomic) BOOL isHtml;
+@property (assign, nonatomic) BOOL isHtml;///是否是网页
 @property (assign, nonatomic) BOOL update;
 @property (assign, nonatomic) BOOL isImg;
 @property (strong, nonatomic) NSMutableArray *images;
-@property (copy, nonatomic) NSString *title;
+@property (copy, nonatomic) NSString *title;    
 @property (copy, nonatomic) NSString *id_String;
+@property (copy, nonatomic) NSString *txt;
 
 
 - (instancetype)initWithDictionary:(NSDictionary *)dic;

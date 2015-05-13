@@ -7,6 +7,8 @@
 //
 
 #import "ChildTrunkViewController.h"
+#import "ChannelTree.h"
+#import "ContentNode.h"
 
 @interface ChildTrunkViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -51,7 +53,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ChannelTree *selectChannel = _arrayContents[indexPath.row];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (selectChannel.hasContent) {
+        NSLog(@"有文章,要显示 html ? ");
+    } else {
+        NSLog(@"没有文章，要显示 txt, \ntext:%@",selectChannel.text);
+    }
     
 }
 /*

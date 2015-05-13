@@ -56,10 +56,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ChannelTree *treeNode = _arrayChannels[indexPath.row];
+    ChannelTree *selectChannel = _arrayChannels[indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
+    if (selectChannel.hasContent) {
+        NSLog(@"有文章,要显示 html ? ");
+    } else {
+        NSLog(@"没有文章，要显示 txt, \ntext:%@",selectChannel.text);
+    }
 }
 
 /*

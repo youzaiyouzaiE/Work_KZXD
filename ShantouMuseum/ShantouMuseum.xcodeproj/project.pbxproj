@@ -67,6 +67,7 @@
 		DA95987F1B00FCDD00D49D42 /* TrunkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA95987E1B00FCDD00D49D42 /* TrunkViewController.m */; };
 		DA9598AE1B02273E00D49D42 /* LeafListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9598AD1B02273E00D49D42 /* LeafListViewController.m */; };
 		DA9598B41B02418900D49D42 /* ChildTrunkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9598B31B02418900D49D42 /* ChildTrunkViewController.m */; };
+		DAB588601B039348009AE32A /* WebContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB5885F1B039348009AE32A /* WebContentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,6 +203,8 @@
 		DA9598AD1B02273E00D49D42 /* LeafListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeafListViewController.m; sourceTree = "<group>"; };
 		DA9598B21B02418900D49D42 /* ChildTrunkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTrunkViewController.h; sourceTree = "<group>"; };
 		DA9598B31B02418900D49D42 /* ChildTrunkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTrunkViewController.m; sourceTree = "<group>"; };
+		DAB5885E1B039348009AE32A /* WebContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebContentViewController.h; sourceTree = "<group>"; };
+		DAB5885F1B039348009AE32A /* WebContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebContentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +326,8 @@
 				DA9598B31B02418900D49D42 /* ChildTrunkViewController.m */,
 				DA9598AC1B02273E00D49D42 /* LeafListViewController.h */,
 				DA9598AD1B02273E00D49D42 /* LeafListViewController.m */,
+				DAB5885E1B039348009AE32A /* WebContentViewController.h */,
+				DAB5885F1B039348009AE32A /* WebContentViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -649,6 +654,7 @@
 				DA8561051AF90C3A005CF033 /* UIImage+MultiFormat.m in Sources */,
 				DA8560FC1AF90C3A005CF033 /* SDImageCache.m in Sources */,
 				DA8560F91AF90C3A005CF033 /* RMMapper.m in Sources */,
+				DAB588601B039348009AE32A /* WebContentViewController.m in Sources */,
 				DA95986E1AFF8B4200D49D42 /* CollectionTripletLayout.m in Sources */,
 				DA8560EE1AF90C3A005CF033 /* CXAlertButtonContainerView.m in Sources */,
 				DA8560671AF90760005CF033 /* AppData.m in Sources */,

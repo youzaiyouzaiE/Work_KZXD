@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ChannelTree;
 
 @interface LeafListViewController : UIViewController
 
+@property (nonatomic, strong) ChannelTree *fatherChannel;
 @property (nonatomic, strong) NSArray *arrayContents;
 
 @end

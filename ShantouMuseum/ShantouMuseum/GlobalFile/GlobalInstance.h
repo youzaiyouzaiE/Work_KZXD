@@ -17,6 +17,6 @@
 
 + (NSString *)intervalSinceNow:(NSString *)theDate;
 + (float)getTextViewHeight:(UITextView *)txtView andUIFont:(UIFont *)font andText:(NSString *)txt;
-+(float)APPVersion;
++ (float)APPVersion;
 
 @end

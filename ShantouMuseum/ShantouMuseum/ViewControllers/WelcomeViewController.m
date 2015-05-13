@@ -10,8 +10,10 @@
 //#import "MainViewController.h"
 #import "ChannelTree.h"
 #import "JSONKit.h"
+#import "NSUserDefaults+RMSaveCustomObject.h"
 
 @interface WelcomeViewController () {
+    ChannelTree *fristChannel;
 }
 
 @end
@@ -22,7 +24,13 @@
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
     // Do any additional setup after loading the view.
-    [self loadDate];
+    fristChannel = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"RootChannel"];
+    if (fristChannel == nil) {
+        [self loadDate];
+    } else {
+        [self.delegate getDataFormServer:fristChannel.children andFristNode:fristChannel];
+        [self.navigationController popViewControllerAnimated:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,26 +40,24 @@
 
 - (void)loadDate
 {
-    
     [RequestWrapper getRequestWithURL:REQUEST_CHANNEL_URL_STR
                        withParameters:nil
                               success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
                                   NSTimeInterval delayTime = 0.5f;
                                   NSString *responsString = operation.responseString;
                                   NSArray *arry = [responsString objectFromJSONString];
-                                 ChannelTree *fristChannel = [[ChannelTree alloc] init];
+                                  fristChannel = [[ChannelTree alloc] init];
                                   fristChannel.name = @"汕头海关网上关史陈列馆";
                                   fristChannel.lengs = 0;
                                   fristChannel.isLeaf = NO;
                                   fristChannel.hasContent = YES;
                                   fristChannel.parent = nil;
                                   [self childrenContentsWithArray:arry andChannelParent:fristChannel];
-                                  NSMutableArray *arrayCurren = fristChannel.children;
+                                  [[NSUserDefaults standardUserDefaults] rm_setCustomObject:fristChannel forKey:@"RootChannel"];
                                   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                      [self.delegate getDataFormServer:arrayCurren andFristNode:fristChannel];
+                                      [self.delegate getDataFormServer:fristChannel.children andFristNode:fristChannel];
                                       [self.navigationController popViewControllerAnimated:NO];
                                   });
-                                  
                               }
                               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                   NSLog(@"fault");

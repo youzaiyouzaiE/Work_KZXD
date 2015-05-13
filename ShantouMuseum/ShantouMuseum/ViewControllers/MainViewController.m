@@ -13,6 +13,7 @@
 #import "WelcomeViewController.h"
 #import "Image.h"
 #import "ContentNode.h"
+#import "NSUserDefaults+RMSaveCustomObject.h"
 
 #import "TrunkViewController.h"
 #import "LeafListViewController.h"
@@ -36,9 +37,10 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
 //     NSLog(@"%@",self.fristChannelTree.name);
-    self.navigationItem.title = self.fristChannelTree.name;
+    
     
     [UITools setNavigationLeftButtonTitle:nil leftAction:nil rightBtnStr:nil rightAction:nil rightBtnSelected:nil navigationTitleStr:@"汕头海关网上关史陈列馆" forViewController:self];
+    self.navigationItem.title = @"汕头海关网上关史陈列馆";
 }
 
 - (void)loadView {
@@ -167,11 +169,13 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     /////是叶节点的解析，不是叶节点的创建 径VC (truncalVC)
     selectChannel = self.arrayCurrenTree[indexPath.row];
-     NSLog(@"栏目 id:%@",selectChannel.id_string);
     if (selectChannel.isLeaf) {
-         NSLog(@"是叶节点, 没有子栏目：%ld",selectChannel.children.count);
-        [self checkChannelContentFormServer:selectChannel.id_string];
-        
+        arrayLeafs = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:LEAF_USER_DEFAULT(selectChannel.id_string)];
+        if (arrayLeafs == nil ) {
+            [self checkChannelContentFormServer:selectChannel.id_string];
+        } else {
+            [self performSegueWithIdentifier:@"MainPushToLeafVC" sender:self];
+        }
     } else {
         NSLog(@"不是叶节点，有%ld个子节点",selectChannel.children.count);
         [self performSegueWithIdentifier:@"MainPushToTrunkVC" sender:self];
@@ -188,14 +192,14 @@
 #pragma mark -
 - (void)checkChannelContentFormServer:(NSString *)channelID
 {
-    /////存到本地文件，本地没有再从服务器取出来
     NSLog(@"%@",REQUEST_CONTENT_URL_STR(channelID));
     [RequestWrapper getRequestWithURL:REQUEST_CONTENT_URL_STR(channelID)
                        withParameters:nil
                               success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
                                   NSString *responsString = operation.responseString;
                                  arrayLeafs = [self analysisDataFormJsonString:responsString];
-                                  [self performSegueWithIdentifier:@"MainPushToLeafVC" sender:self];
+                                [[NSUserDefaults standardUserDefaults] rm_setCustomObject:arrayLeafs forKey:LEAF_USER_DEFAULT(channelID)];
+                                [self performSegueWithIdentifier:@"MainPushToLeafVC" sender:self];
                               }
                               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                   NSLog(@"获取数据 fault");
@@ -230,6 +234,7 @@
     } else if ([segue.identifier isEqualToString:@"MainPushToLeafVC"]) {
         LeafListViewController *leafVC = (LeafListViewController *)segue.destinationViewController;
         leafVC.arrayContents = arrayLeafs;
+        leafVC.fatherChannel = selectChannel;
     }
     
 }
