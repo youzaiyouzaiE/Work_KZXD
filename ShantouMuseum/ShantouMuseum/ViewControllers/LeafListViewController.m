@@ -10,10 +10,11 @@
 #import "ContentNode.h"
 #import "ChannelTree.h"
 #import "WebContentViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface LeafListViewController ()<UITableViewDataSource, UITableViewDelegate> {
     ContentNode *selectNod;
-    BOOL isHasImage;
+    
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -45,25 +46,53 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    ContentNode *currentNod = _arrayContents[indexPath.row];
+    if (!currentNod.isImg && currentNod.contentImg.length > 2) {
+        return 90;
+    } else {
+        return 50;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *cellIdentifier = nil;
-    if (isHasImage) {
+    BOOL isHasImage = NO;
+     ContentNode *currentNod = _arrayContents[indexPath.row];
+    if (!currentNod.isImg && currentNod.contentImg.length > 2) {
         cellIdentifier = @"imageAndLabelCell";
+        isHasImage = YES;
     } else {
         cellIdentifier = @"onlyLabelsCell";
     }
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        if (isHasImage) {
+            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+        } else
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    ContentNode *currentNod = _arrayContents[indexPath.row];
-    cell.textLabel.text = currentNod.title;
-    if (currentNod.isImg) {
-        cell.imageView.backgroundColor = [UIColor yellowColor];
+   
+    if (isHasImage) {//有图片
+        UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
+        UILabel *labelTitle = (UILabel *)[cell viewWithTag:2];
+        UILabel *labelDesction = (UILabel *)[cell viewWithTag:3];
+        
+//        NSString *imageStr = IMAGE_ROAD_URL_STR(currentNod.contentImg);
+        [imageView sd_setImageWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(currentNod.contentImg)]
+                          placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                      NSLog(@"图片加载完成！");
+                                 }];
+        labelTitle.text = currentNod.title;
+        labelDesction.text = currentNod.desc;
+        
+    } else {
+        cell.textLabel.text = currentNod.title;
+        if (currentNod.isImg) {
+            cell.imageView.backgroundColor = [UIColor yellowColor];
+        }
     }
     return cell;
 }
@@ -75,7 +104,11 @@
     if (selectNod.isHtml) {
         [self performSegueWithIdentifier:@"LeafPushToWebVC" sender:self];
     }
-    
+    if (selectNod.isImg) {
+         NSLog(@"显示 imgs = %ld",[selectNod.images count]);
+    } else {
+         NSLog(@"显示 图片%@",selectNod.contentImg);
+    }
 }
 
 #pragma mark -

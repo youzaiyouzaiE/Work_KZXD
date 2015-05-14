@@ -23,6 +23,8 @@
         self.title = [dic objectForKey:@"title"];
         self.id_String = [dic objectForKey:@"id"];
         self.txt = [dic objectForKey:@"txt"];
+        self.contentImg = [dic objectForKey:@"contentImg"];
+        self.desc = [dic objectForKey:@"desc"];
     }
     return self;
 }

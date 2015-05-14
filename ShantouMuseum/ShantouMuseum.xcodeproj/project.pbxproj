@@ -68,6 +68,8 @@
 		DA9598AE1B02273E00D49D42 /* LeafListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9598AD1B02273E00D49D42 /* LeafListViewController.m */; };
 		DA9598B41B02418900D49D42 /* ChildTrunkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9598B31B02418900D49D42 /* ChildTrunkViewController.m */; };
 		DAB588601B039348009AE32A /* WebContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB5885F1B039348009AE32A /* WebContentViewController.m */; };
+		DACF15731B04DA07005445C4 /* ImageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF15721B04DA07005445C4 /* ImageListViewController.m */; };
+		DACF15761B04E38F005445C4 /* PhotoViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF15751B04E38F005445C4 /* PhotoViewViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +207,10 @@
 		DA9598B31B02418900D49D42 /* ChildTrunkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTrunkViewController.m; sourceTree = "<group>"; };
 		DAB5885E1B039348009AE32A /* WebContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebContentViewController.h; sourceTree = "<group>"; };
 		DAB5885F1B039348009AE32A /* WebContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebContentViewController.m; sourceTree = "<group>"; };
+		DACF15711B04DA07005445C4 /* ImageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageListViewController.h; sourceTree = "<group>"; };
+		DACF15721B04DA07005445C4 /* ImageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageListViewController.m; sourceTree = "<group>"; };
+		DACF15741B04E38F005445C4 /* PhotoViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewViewController.h; sourceTree = "<group>"; };
+		DACF15751B04E38F005445C4 /* PhotoViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,8 +332,12 @@
 				DA9598B31B02418900D49D42 /* ChildTrunkViewController.m */,
 				DA9598AC1B02273E00D49D42 /* LeafListViewController.h */,
 				DA9598AD1B02273E00D49D42 /* LeafListViewController.m */,
+				DACF15711B04DA07005445C4 /* ImageListViewController.h */,
+				DACF15721B04DA07005445C4 /* ImageListViewController.m */,
 				DAB5885E1B039348009AE32A /* WebContentViewController.h */,
 				DAB5885F1B039348009AE32A /* WebContentViewController.m */,
+				DACF15741B04E38F005445C4 /* PhotoViewViewController.h */,
+				DACF15751B04E38F005445C4 /* PhotoViewViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -663,6 +673,7 @@
 				DA8561041AF90C3A005CF033 /* UIImage+GIF.m in Sources */,
 				DA8561011AF90C3A005CF033 /* SDWebImageManager.m in Sources */,
 				DA8560F51AF90C3A005CF033 /* MBProgressHUD.m in Sources */,
+				DACF15731B04DA07005445C4 /* ImageListViewController.m in Sources */,
 				DA8560E61AF90C3A005CF033 /* AFHTTPSessionManager.m in Sources */,
 				DA9598B41B02418900D49D42 /* ChildTrunkViewController.m in Sources */,
 				DA8560F61AF90C3A005CF033 /* NSObject+RMArchivable.m in Sources */,
@@ -692,6 +703,7 @@
 				DA8560691AF90760005CF033 /* GlobalInstance.m in Sources */,
 				DA8561031AF90C3A005CF033 /* UIButton+WebCache.m in Sources */,
 				DA8560F31AF90C3A005CF033 /* LFGlassView.m in Sources */,
+				DACF15761B04E38F005445C4 /* PhotoViewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

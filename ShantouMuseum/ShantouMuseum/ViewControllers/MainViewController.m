@@ -55,9 +55,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
-    
-   
+
 }
 
 - (void)getDataFormServer:(NSMutableArray *)nodeArray andFristNode:(ChannelTree *)fristNode{
@@ -171,6 +169,7 @@
     selectChannel = self.arrayCurrenTree[indexPath.row];
     if (selectChannel.isLeaf) {
         arrayLeafs = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:LEAF_USER_DEFAULT(selectChannel.id_string)];
+        NSLog(@"是叶节点");
         if (arrayLeafs == nil ) {
             [self checkChannelContentFormServer:selectChannel.id_string];
         } else {
@@ -181,11 +180,11 @@
         [self performSegueWithIdentifier:@"MainPushToTrunkVC" sender:self];
     }
     
-    if (selectChannel.hasContent) {
-         NSLog(@"有文章,要显示 html ? ");
-    } else {
-         NSLog(@"没有文章，要显示 txt, \ntext:%@",selectChannel.text);
-    }
+//    if (selectChannel.hasContent) {
+//         NSLog(@"有文章,要显示 html ? ");
+//    } else {
+//         NSLog(@"没有文章，要显示 txt, \ntext:%@",selectChannel.text);
+//    }
 }
 
 
@@ -212,8 +211,8 @@
     NSArray *arry = [jsonStr objectFromJSONString];
     for (NSDictionary *dic in arry) {
         ContentNode *node = [[ContentNode alloc] initWithDictionary:dic];
-        if ([dic objectForKey:@"img"]) {
-            NSArray *imgsArray = dic[@"img"];
+        if ([dic objectForKey:@"imgs"]) {
+            NSArray *imgsArray = dic[@"imgs"];
             for (NSDictionary *imgDic in imgsArray) {
                 Image *image = [[Image alloc] initWithDictionary:imgDic];
                 [node addImage:image];
