@@ -25,6 +25,7 @@
 #import "DataTools.h"
 #import "JSONKit.h"
 #import "RequestWrapper.h"
+#import "NSUserDefaults+RMSaveCustomObject.h"
 #endif
 
 #ifdef DEBUG

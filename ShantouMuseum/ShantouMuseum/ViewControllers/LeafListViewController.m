@@ -79,7 +79,7 @@
         UILabel *labelTitle = (UILabel *)[cell viewWithTag:2];
         UILabel *labelDesction = (UILabel *)[cell viewWithTag:3];
         
-//        NSString *imageStr = IMAGE_ROAD_URL_STR(currentNod.contentImg);
+        NSString *imageStr = IMAGE_ROAD_URL_STR(currentNod.contentImg);
         [imageView sd_setImageWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(currentNod.contentImg)]
                           placeholderImage:[UIImage imageNamed:@"placeholder.png"]
                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

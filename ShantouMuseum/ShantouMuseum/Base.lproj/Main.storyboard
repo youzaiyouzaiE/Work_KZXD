@@ -251,7 +251,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="RhN-Lh-idF"/>
                     <connections>
-                        <segue destination="i4G-ls-MM1" kind="push" identifier="ChildPushToLeafVC" id="jwI-2W-oti"/>
+                        <segue destination="i4G-ls-MM1" kind="push" identifier="ChildTrunkPushToLeafVC" id="jwI-2W-oti"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3vQ-lS-hdI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -430,6 +430,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9JB-6C-qHj"/>
+        <segue reference="jwI-2W-oti"/>
     </inferredMetricsTieBreakers>
 </document>

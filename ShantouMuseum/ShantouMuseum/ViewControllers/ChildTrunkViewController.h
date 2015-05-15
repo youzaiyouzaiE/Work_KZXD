@@ -10,6 +10,6 @@
 
 @interface ChildTrunkViewController : UIViewController
 
-@property (strong, nonatomic) NSArray *arrayContents;
+@property (strong, nonatomic) NSArray *arrayChannels;
 
 @end
