@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSMutableArray *photos;
 @property (nonatomic, strong) NSMutableArray *thumbs;
 
+@property (nonatomic, strong) NSMutableArray *onlyPhotos;
 @end
 
 @implementation LeafListViewController
@@ -32,10 +33,12 @@
     self.navigationItem.title = _fatherChannel.name;
     _photos = [NSMutableArray array];
     _thumbs = [NSMutableArray array];
+    
     for (ContentNode *nodeLeaf in _arrayContents) {
         if (nodeLeaf.isImg && nodeLeaf.images !=nil) {/////显示Imgs里的内容
-             NSLog(@"显示Imgs里的内容");
-        } else {
+            NSLog(@"显示Imgs里的内容");
+            
+        } else if (!nodeLeaf.isImg && nodeLeaf.contentImg != nil){
             MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(nodeLeaf.contentImg)]];
             photo.caption = nodeLeaf.desc;
             [_photos addObject:photo];
@@ -120,12 +123,37 @@
     if (selectNod.isHtml) {
         [self performSegueWithIdentifier:@"LeafPushToWebVC" sender:self];
     }
-    if (selectNod.isImg) {
+    else if (selectNod.isImg && selectNod.images !=nil) {
          NSLog(@"显示 imgs = %ld",[selectNod.images count]);
-    } else {
+        [_photos removeAllObjects];
+        for (Image *image in selectNod.images) {
+            MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(image.url)]];
+            photo.caption = image.desc;
+            [_photos addObject:photo];
+        }
+        BOOL displayActionButton = NO;////分享
+        BOOL displaySelectionButtons = NO;
+        BOOL displayNavArrows = NO;
+        BOOL enableGrid = NO;
+        BOOL startOnGrid = NO;
+        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+        browser.displayActionButton = displayActionButton;
+        browser.displayNavArrows = displayNavArrows;
+        browser.displaySelectionButtons = displaySelectionButtons;
+        browser.alwaysShowControls = displaySelectionButtons;
+        browser.zoomPhotosToFill = YES;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+        browser.wantsFullScreenLayout = YES;
+#endif
+        browser.enableGrid = enableGrid;
+        browser.startOnGrid = startOnGrid;
+        [browser setCurrentPhotoIndex:indexPath.row];
+        [self.navigationController pushViewController:browser animated:YES];
+        
+    } else if (!selectNod.isImg && selectNod.contentImg != nil) {
 //        NSMutableArray *photos = [[NSMutableArray alloc] init];
 //        NSMutableArray *thumbs = [[NSMutableArray alloc] init];
-        BOOL displayActionButton = NO;
+        BOOL displayActionButton = NO;////分享
         BOOL displaySelectionButtons = NO;
         BOOL displayNavArrows = NO;
         BOOL enableGrid = YES;
