@@ -11,12 +11,16 @@
 #import "ChannelTree.h"
 #import "WebContentViewController.h"
 #import "UIImageView+WebCache.h"
-
-@interface LeafListViewController ()<UITableViewDataSource, UITableViewDelegate> {
+#import "MWCommon.h"
+#import "MWPhotoBrowser.h"
+@interface LeafListViewController ()<UITableViewDataSource, UITableViewDelegate,MWPhotoBrowserDelegate> {
     ContentNode *selectNod;
     
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (nonatomic, strong) NSMutableArray *photos;
+@property (nonatomic, strong) NSMutableArray *thumbs;
 
 @end
 
@@ -26,6 +30,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = _fatherChannel.name;
+    _photos = [NSMutableArray array];
+    _thumbs = [NSMutableArray array];
+    for (ContentNode *nodeLeaf in _arrayContents) {
+        if (nodeLeaf.isImg && nodeLeaf.images !=nil) {/////显示Imgs里的内容
+             NSLog(@"显示Imgs里的内容");
+        } else {
+            MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(nodeLeaf.contentImg)]];
+            photo.caption = nodeLeaf.desc;
+            [_photos addObject:photo];
+            [_thumbs addObject:[MWPhoto photoWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(nodeLeaf.contentImg)]]];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,11 +123,81 @@
     if (selectNod.isImg) {
          NSLog(@"显示 imgs = %ld",[selectNod.images count]);
     } else {
-         NSLog(@"显示 图片%@",selectNod.contentImg);
+//        NSMutableArray *photos = [[NSMutableArray alloc] init];
+//        NSMutableArray *thumbs = [[NSMutableArray alloc] init];
+        BOOL displayActionButton = NO;
+        BOOL displaySelectionButtons = NO;
+        BOOL displayNavArrows = NO;
+        BOOL enableGrid = YES;
+        BOOL startOnGrid = NO;
+        
+        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+        browser.displayActionButton = displayActionButton;
+        browser.displayNavArrows = displayNavArrows;
+        browser.displaySelectionButtons = displaySelectionButtons;
+        browser.alwaysShowControls = displaySelectionButtons;
+        browser.zoomPhotosToFill = YES;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+        browser.wantsFullScreenLayout = YES;
+#endif
+        browser.enableGrid = enableGrid;
+        browser.startOnGrid = startOnGrid;
+        [browser setCurrentPhotoIndex:indexPath.row];
+        [self.navigationController pushViewController:browser animated:YES];
     }
 }
 
-#pragma mark -
+#pragma mark - MWPhotoBrowserDelegate
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return _photos.count;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < _photos.count)
+        return [_photos objectAtIndex:index];
+    return nil;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
+    if (index < _thumbs.count)
+        return [_thumbs objectAtIndex:index];
+    return nil;
+}
+
+//- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
+//    MWPhoto *photo = [self.photos objectAtIndex:index];
+//    MWCaptionView *captionView = [[MWCaptionView alloc] initWithPhoto:photo];
+//    return [captionView autorelease];
+//}
+
+//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
+//    NSLog(@"ACTION!");
+//}
+
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
+    NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
+}
+//
+//- (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
+//    return [[_selections objectAtIndex:index] boolValue];
+//}
+//
+////- (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
+////    return [NSString stringWithFormat:@"Photo %lu", (unsigned long)index+1];
+////}
+//
+//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)selected {
+//    [_selections replaceObjectAtIndex:index withObject:[NSNumber numberWithBool:selected]];
+//    NSLog(@"Photo at index %lu selected %@", (unsigned long)index, selected ? @"YES" : @"NO");
+//}
+//
+//- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
+//    // If we subscribe to this method we must dismiss the view controller ourselves
+//    NSLog(@"Did finish modal presentation");
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
+
+#pragma mark - 请求从网络请求文字数据并保存
 - (void)checkChannelContentFormServer:(NSString *)channelID
 {
     /////存到本地文件，本地没有再从服务器取出来

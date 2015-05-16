@@ -41,6 +41,7 @@
     
     [UITools setNavigationLeftButtonTitle:nil leftAction:nil rightBtnStr:nil rightAction:nil rightBtnSelected:nil navigationTitleStr:@"汕头海关网上关史陈列馆" forViewController:self];
     self.navigationItem.title = @"汕头海关网上关史陈列馆";
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 - (void)loadView {
