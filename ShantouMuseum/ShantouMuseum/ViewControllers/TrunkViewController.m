@@ -70,7 +70,7 @@
         arrayContentNodes = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:LEAF_USER_DEFAULT(selectChannel.id_string)];
         if (arrayContentNodes == nil) {
             [self checkChannelContentFormServer:selectChannel.id_string];
-        } else {
+        } else if(arrayContentNodes.count != 0) {
             [self performSegueWithIdentifier:@"TrunkPushToLeafVC" sender:self];
         }
     } else {

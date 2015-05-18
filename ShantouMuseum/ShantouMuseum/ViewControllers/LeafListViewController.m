@@ -13,6 +13,8 @@
 #import "UIImageView+WebCache.h"
 #import "MWCommon.h"
 #import "MWPhotoBrowser.h"
+#import "SDImageCache.h"
+
 @interface LeafListViewController ()<UITableViewDataSource, UITableViewDelegate,MWPhotoBrowserDelegate> {
     ContentNode *selectNod;
     
@@ -120,11 +122,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     selectNod = _arrayContents[indexPath.row];
-    if (selectNod.isHtml) {
-        [self performSegueWithIdentifier:@"LeafPushToWebVC" sender:self];
-    }
-    else if (selectNod.isImg && selectNod.images !=nil) {
-         NSLog(@"显示 imgs = %ld",[selectNod.images count]);
+   
+        if (selectNod.isImg && selectNod.images !=nil) {////显示子节点里的图片
+//         NSLog(@"显示 imgs = %ld",[selectNod.images count]);
         [_photos removeAllObjects];
         for (Image *image in selectNod.images) {
             MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(image.url)]];
@@ -150,9 +150,7 @@
         [browser setCurrentPhotoIndex:indexPath.row];
         [self.navigationController pushViewController:browser animated:YES];
         
-    } else if (!selectNod.isImg && selectNod.contentImg != nil) {
-//        NSMutableArray *photos = [[NSMutableArray alloc] init];
-//        NSMutableArray *thumbs = [[NSMutableArray alloc] init];
+    } else if (!selectNod.isImg && selectNod.contentImg != nil) {///对应List里的图片
         BOOL displayActionButton = NO;////分享
         BOOL displaySelectionButtons = NO;
         BOOL displayNavArrows = NO;
@@ -172,6 +170,8 @@
         browser.startOnGrid = startOnGrid;
         [browser setCurrentPhotoIndex:indexPath.row];
         [self.navigationController pushViewController:browser animated:YES];
+    } else if (selectNod.isHtml) {////是网页展示
+        [self performSegueWithIdentifier:@"LeafPushToWebVC" sender:self];
     }
 }
 

@@ -32,7 +32,6 @@
 		DA9598B41B02418900D49D42 /* ChildTrunkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9598B31B02418900D49D42 /* ChildTrunkViewController.m */; };
 		DAB588601B039348009AE32A /* WebContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB5885F1B039348009AE32A /* WebContentViewController.m */; };
 		DACF15731B04DA07005445C4 /* ImageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF15721B04DA07005445C4 /* ImageListViewController.m */; };
-		DACF15761B04E38F005445C4 /* PhotoViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF15751B04E38F005445C4 /* PhotoViewViewController.m */; };
 		DACF16741B074749005445C4 /* NSObject+RMArchivable.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF166D1B074749005445C4 /* NSObject+RMArchivable.m */; };
 		DACF16751B074749005445C4 /* NSObject+RMCopyable.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF166F1B074749005445C4 /* NSObject+RMCopyable.m */; };
 		DACF16761B074749005445C4 /* NSUserDefaults+RMSaveCustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF16711B074749005445C4 /* NSUserDefaults+RMSaveCustomObject.m */; };
@@ -99,8 +98,6 @@
 		DAB5885F1B039348009AE32A /* WebContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebContentViewController.m; sourceTree = "<group>"; };
 		DACF15711B04DA07005445C4 /* ImageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageListViewController.h; sourceTree = "<group>"; };
 		DACF15721B04DA07005445C4 /* ImageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageListViewController.m; sourceTree = "<group>"; };
-		DACF15741B04E38F005445C4 /* PhotoViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewViewController.h; sourceTree = "<group>"; };
-		DACF15751B04E38F005445C4 /* PhotoViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewViewController.m; sourceTree = "<group>"; };
 		DACF166C1B074749005445C4 /* NSObject+RMArchivable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RMArchivable.h"; sourceTree = "<group>"; };
 		DACF166D1B074749005445C4 /* NSObject+RMArchivable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RMArchivable.m"; sourceTree = "<group>"; };
 		DACF166E1B074749005445C4 /* NSObject+RMCopyable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RMCopyable.h"; sourceTree = "<group>"; };
@@ -246,8 +243,6 @@
 				DACF15721B04DA07005445C4 /* ImageListViewController.m */,
 				DAB5885E1B039348009AE32A /* WebContentViewController.h */,
 				DAB5885F1B039348009AE32A /* WebContentViewController.m */,
-				DACF15741B04E38F005445C4 /* PhotoViewViewController.h */,
-				DACF15751B04E38F005445C4 /* PhotoViewViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -472,7 +467,6 @@
 				DA855EDD1AF8FFB5005CF033 /* main.m in Sources */,
 				DA82AFDF1AFE22980088BF7A /* ChannelTree.m in Sources */,
 				DA8560691AF90760005CF033 /* GlobalInstance.m in Sources */,
-				DACF15761B04E38F005445C4 /* PhotoViewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
