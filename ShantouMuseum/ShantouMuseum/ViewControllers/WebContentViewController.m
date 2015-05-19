@@ -8,6 +8,7 @@
 
 #import "WebContentViewController.h"
 #import "ContentNode.h"
+#import "TFHpple.h"
 
 @interface WebContentViewController ()<UIWebViewDelegate> {
     
@@ -18,9 +19,20 @@
 
 @implementation WebContentViewController
 
+- (void)loadView {
+    [super loadView];
+
+//    TFHppleElement * element = [tdElements objectAtIndex:0];
+//    NSString *text = [element text];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = _nodeLeaf.title;
+    NSData *htmlDat = [_nodeLeaf.txt dataUsingEncoding:NSUTF8StringEncoding];
+    TFHpple *hpple = [[TFHpple alloc] initWithHTMLData:htmlDat];
+    NSArray *tdElements = [hpple searchWithXPathQuery:@"//img"];
+     NSLog(@"%@",tdElements);
     [self.webView loadHTMLString:_nodeLeaf.txt baseURL:nil];
     self.webView.scalesPageToFit = YES;
     // Do any additional setup after loading the view.
