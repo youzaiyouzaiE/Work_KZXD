@@ -54,6 +54,12 @@
 #define COCOAPODS_VERSION_MINOR_DACircularProgress 3
 #define COCOAPODS_VERSION_PATCH_DACircularProgress 1
 
+// HTMLReader
+#define COCOAPODS_POD_AVAILABLE_HTMLReader
+#define COCOAPODS_VERSION_MAJOR_HTMLReader 0
+#define COCOAPODS_VERSION_MINOR_HTMLReader 7
+#define COCOAPODS_VERSION_PATCH_HTMLReader 1
+
 // JSONKit
 #define COCOAPODS_POD_AVAILABLE_JSONKit
 // This library does not follow semantic-versioning,

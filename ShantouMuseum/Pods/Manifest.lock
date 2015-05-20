@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - DACircularProgress (2.3.1)
+  - HTMLReader (0.7.1)
   - JSONKit (1.5pre)
   - MBProgressHUD (0.9.1)
   - MWPhotoBrowser (1.4.1):
@@ -35,6 +36,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.0)
+  - HTMLReader
   - JSONKit (~> 1.5pre)
   - MWPhotoBrowser
   - SDWebImage (~> 3.7.1)
@@ -42,6 +44,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  HTMLReader: e6ba09514d125f45e810b6c6c1cebf3542f04d89
   JSONKit: bae313ce6a6c444f40489a6c0b023f399888871f
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MWPhotoBrowser: 2531e682860d62b8a7ba8659de02eb9040e431e5
