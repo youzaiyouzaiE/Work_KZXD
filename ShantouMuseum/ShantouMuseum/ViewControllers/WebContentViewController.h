@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+
+static NSString * const WebImageDocmentName    = @"webViewImage";
 @class ContentNode;
 
 @interface WebContentViewController : UIViewController

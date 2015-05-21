@@ -45,6 +45,49 @@ SHARE_INSTANCET(UITools)
     return [UIImage imageWithContentsOfFile:filePath];
 }
 
+#pragma mark - documentFile option
++ (NSString *)pathForDocumentName:(NSString *)documentName////获取 doment下文件路径
+{
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *imageDir = [paths[0] stringByAppendingPathComponent:FORMAT(@"%@",documentName)];
+    if ([fm fileExistsAtPath:imageDir]) {
+        NSLog(@"文件夾已经存在");
+        return imageDir;
+    } else {
+        NSLog(@"文件夾不存在");
+        BOOL creat = [[NSFileManager defaultManager] createDirectoryAtPath:imageDir withIntermediateDirectories:YES attributes:nil error:nil];
+        if (creat) {
+             NSLog(@"创建%@文件成功！",documentName);
+            return imageDir;
+        }else {
+            NSLog(@"创建%@文件失败！",documentName);
+            return @"-1";
+        }
+    }
+}
+
++ (NSArray *)getFilesInDocumentPath:(NSString *)path
+{
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+//    NSString *pathName = [paths[0] stringByAppendingPathComponent:FORMAT(@"%@",camera.uid)];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSArray *sourceArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
+        NSMutableArray *mutableArray = [NSMutableArray array];
+        mutableArray = [NSMutableArray arrayWithArray:sourceArray];
+        return mutableArray;
+    } else
+        return nil;
+}
+
+- (BOOL)saveImageToFileParth:parth image:(UIImage *)image inFileName:(NSString *)fileName
+{
+    NSData *imgData = UIImageJPEGRepresentation(image, 1.0f);
+    NSString *filePath = [parth stringByAppendingPathComponent:fileName];
+    return [imgData writeToFile:filePath atomically:YES];
+}
+
+#pragma mark- NavigationSet
 + (void)setNavigationTitlViewString:(NSString *)title andTitleColor:(UIColor *)color forViewController:(UIViewController *)controller
 {
     UILabel *titleTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 168, 44)];
