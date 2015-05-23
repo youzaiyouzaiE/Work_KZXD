@@ -44,7 +44,7 @@
         [arrayImgUrlStr addObject:urlStr];
     }
     
-    NSString *documentPath = [UITools pathForDocumentName:WebImageDocmentName];
+    NSString *documentPath = [[UITools getInstancet] pathForDocumentName:WebImageDocmentName];
 //    NSArray *arrayImages = [UITools getFilesInDocumentPath:documentPath];
     for (NSString *imgUrl in arrayImgUrlStr) {
         NSString *imagPath = [documentPath stringByAppendingPathComponent:imgUrl];

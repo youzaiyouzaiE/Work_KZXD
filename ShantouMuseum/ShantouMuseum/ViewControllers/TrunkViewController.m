@@ -121,6 +121,7 @@
     if ([segue.identifier isEqualToString:@"TrunkPushToLeafVC"]) {
         LeafListViewController *leafVC = (LeafListViewController *)segue.destinationViewController;
         leafVC.arrayContents = arrayContentNodes;
+        leafVC.fatherChannel = selectChannel;
     } else if ([segue.identifier isEqualToString:@"TrunkPushToChildTrunkVC"]) {
         ChildTrunkViewController *childTrunkVC = (ChildTrunkViewController *)segue.destinationViewController;
         childTrunkVC.arrayChannels = selectChannel.children;

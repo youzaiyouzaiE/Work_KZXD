@@ -13,5 +13,6 @@
 
 @property (nonatomic, strong) ChannelTree *fatherChannel;
 @property (nonatomic, strong) NSArray *arrayContents;
+@property (nonatomic, copy) NSString *leafPath;
 
 @end

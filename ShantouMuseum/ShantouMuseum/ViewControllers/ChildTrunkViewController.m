@@ -13,6 +13,7 @@
 
 @interface ChildTrunkViewController () <UITableViewDelegate, UITableViewDataSource> {
      NSArray *arrayContentNodes;
+    ChannelTree *selectChannel;
 }
 
 @end
@@ -58,7 +59,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     arrayContentNodes = nil;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ChannelTree *selectChannel = _arrayChannels[indexPath.row];
+    selectChannel = _arrayChannels[indexPath.row];
     if (selectChannel.isLeaf) {
         arrayContentNodes = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:LEAF_USER_DEFAULT(selectChannel.id_string)];
         if (arrayContentNodes == nil) {
@@ -113,6 +114,7 @@
     if ([segue.identifier isEqualToString:@"ChildTrunkPushToLeafVC"]) {
         LeafListViewController *leafVC = (LeafListViewController *)segue.destinationViewController;
         leafVC.arrayContents = arrayContentNodes;
+        leafVC.fatherChannel = selectChannel;
     }
 }
 

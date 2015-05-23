@@ -99,12 +99,17 @@
         UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
         UILabel *labelTitle = (UILabel *)[cell viewWithTag:2];
         UILabel *labelDesction = (UILabel *)[cell viewWithTag:3];
-        
         NSString *imageStr = IMAGE_ROAD_URL_STR(currentNod.contentImg);
+        
         [imageView sd_setImageWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(currentNod.contentImg)]
                           placeholderImage:[UIImage imageNamed:@"placeholder.png"]
                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                       NSLog(@"图片加载完成！");
+                                     if ([[UITools getInstancet] saveImageToFileParth:[self getPathString:self.fatherChannel] image:image inFileName:[self getImageName:currentNod.contentImg]]) {
+                                          NSLog(@"save success");
+                                     } else {
+                                          NSLog(@"save fail");
+                                     }
                                  }];
         labelTitle.text = currentNod.title;
         labelDesction.text = currentNod.desc;
@@ -116,6 +121,31 @@
         }
     }
     return cell;
+}
+
+- (NSString *)getImageName:(NSString *)imageUrl {
+    NSArray *array =[imageUrl componentsSeparatedByString:@"/"];
+    NSString *string = @"";
+    for (NSString *str in array) {
+        string = [string stringByAppendingString:str];
+    }
+    return string;
+}
+
+- (NSString *)getPathString:(ChannelTree *)leafNod {
+    NSMutableArray *nameArray = [NSMutableArray array];
+    while (leafNod.parent != nil) {
+        [nameArray addObject:leafNod.name];
+        leafNod = leafNod.parent;
+    }
+    if (leafNod.parent == nil) {
+        [nameArray addObject:leafNod.name];
+    }
+    NSString *pathName = @"";
+    for (NSInteger i = nameArray.count -1; i >= 0; i--) {
+        pathName = [pathName stringByAppendingPathComponent:nameArray[i]];
+    }
+    return pathName;
 }
 
 #pragma mark - UItableViewDelegate

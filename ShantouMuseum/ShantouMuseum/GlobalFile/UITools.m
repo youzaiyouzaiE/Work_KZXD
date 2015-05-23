@@ -46,7 +46,7 @@ SHARE_INSTANCET(UITools)
 }
 
 #pragma mark - documentFile option
-+ (NSString *)pathForDocumentName:(NSString *)documentName////获取 doment下文件路径
+- (NSString *)pathForDocumentName:(NSString *)documentName////获取 doment下文件路径
 {
     NSFileManager *fm = [NSFileManager defaultManager];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
@@ -69,10 +69,10 @@ SHARE_INSTANCET(UITools)
 
 + (NSArray *)getFilesInDocumentPath:(NSString *)path
 {
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-//    NSString *pathName = [paths[0] stringByAppendingPathComponent:FORMAT(@"%@",camera.uid)];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        NSArray *sourceArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *pathName = [paths[0] stringByAppendingPathComponent:path];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:pathName]) {
+        NSArray *sourceArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:pathName error:nil];
         NSMutableArray *mutableArray = [NSMutableArray array];
         mutableArray = [NSMutableArray arrayWithArray:sourceArray];
         return mutableArray;
@@ -83,7 +83,12 @@ SHARE_INSTANCET(UITools)
 - (BOOL)saveImageToFileParth:parth image:(UIImage *)image inFileName:(NSString *)fileName
 {
     NSData *imgData = UIImageJPEGRepresentation(image, 1.0f);
-    NSString *filePath = [parth stringByAppendingPathComponent:fileName];
+    NSString *pathName = [self pathForDocumentName:parth];
+    if ([pathName isEqualToString:@"-1"]) {
+        NSLog(@"创建文件夾失败");
+        return NO;
+    }
+    NSString *filePath = [pathName stringByAppendingPathComponent:fileName];
     return [imgData writeToFile:filePath atomically:YES];
 }
 
