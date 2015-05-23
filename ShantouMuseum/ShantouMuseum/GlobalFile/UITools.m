@@ -52,13 +52,13 @@ SHARE_INSTANCET(UITools)
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString *imageDir = [paths[0] stringByAppendingPathComponent:FORMAT(@"%@",documentName)];
     if ([fm fileExistsAtPath:imageDir]) {
-        NSLog(@"文件夾已经存在");
+//        NSLog(@"文件夾已经存在");
         return imageDir;
     } else {
-        NSLog(@"文件夾不存在");
+//        NSLog(@"文件夾不存在");
         BOOL creat = [[NSFileManager defaultManager] createDirectoryAtPath:imageDir withIntermediateDirectories:YES attributes:nil error:nil];
         if (creat) {
-             NSLog(@"创建%@文件成功！",documentName);
+//             NSLog(@"创建%@文件成功！",documentName);
             return imageDir;
         }else {
             NSLog(@"创建%@文件失败！",documentName);

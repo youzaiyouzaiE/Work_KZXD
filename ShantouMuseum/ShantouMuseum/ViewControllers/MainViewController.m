@@ -177,7 +177,7 @@
             [self performSegueWithIdentifier:@"MainPushToLeafVC" sender:self];
         }
     } else {
-        NSLog(@"不是叶节点，有%ld个子节点",selectChannel.children.count);
+//        NSLog(@"不是叶节点，有%ld个子节点",selectChannel.children.count);
         [self performSegueWithIdentifier:@"MainPushToTrunkVC" sender:self];
     }
     

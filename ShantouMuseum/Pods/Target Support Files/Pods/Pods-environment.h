@@ -73,12 +73,6 @@
 #define COCOAPODS_VERSION_MINOR_MBProgressHUD 9
 #define COCOAPODS_VERSION_PATCH_MBProgressHUD 1
 
-// MWPhotoBrowser
-#define COCOAPODS_POD_AVAILABLE_MWPhotoBrowser
-#define COCOAPODS_VERSION_MAJOR_MWPhotoBrowser 1
-#define COCOAPODS_VERSION_MINOR_MWPhotoBrowser 4
-#define COCOAPODS_VERSION_PATCH_MWPhotoBrowser 1
-
 // PSTCollectionView
 #define COCOAPODS_POD_AVAILABLE_PSTCollectionView
 #define COCOAPODS_VERSION_MAJOR_PSTCollectionView 1

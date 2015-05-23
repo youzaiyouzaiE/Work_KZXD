@@ -122,13 +122,13 @@ static void ASDispatchOnceOnMainThread(dispatch_once_t *predicate, dispatch_bloc
 }
 
 //获取自适应字的高度？？？
-+ (float)getTextViewHeight:(UITextView *)txtView andUIFont:(UIFont *)font andText:(NSString *)txt
-{
-    float fPadding = 16.0;
-    CGSize constraint = CGSizeMake(txtView.contentSize.width - 10 - fPadding, CGFLOAT_MAX);
-    CGSize size = [txt sizeWithFont:font constrainedToSize:constraint lineBreakMode:0];
-    float fHeight = size.height + 16.0;
-    return fHeight;
-}
+//+ (float)getTextViewHeight:(UITextView *)txtView andUIFont:(UIFont *)font andText:(NSString *)txt
+//{
+//    float fPadding = 16.0;
+//    CGSize constraint = CGSizeMake(txtView.contentSize.width - 10 - fPadding, CGFLOAT_MAX);
+//    CGSize size = [txt sizeWithFont:font constrainedToSize:constraint lineBreakMode:0];
+//    float fHeight = size.height + 16.0;
+//    return fHeight;
+//}
 
 @end

@@ -13,6 +13,8 @@
 
 #pragma mark - data style
 
+SHARE_INSTANCET(DataTools)
+
 //+ (NSString *)yearMonthDateStringFromiPhone
 //{
 //    NSDate *  senddate=[NSDate date];

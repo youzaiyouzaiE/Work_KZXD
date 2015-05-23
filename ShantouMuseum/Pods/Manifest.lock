@@ -24,11 +24,6 @@ PODS:
   - HTMLReader (0.7.1)
   - JSONKit (1.5pre)
   - MBProgressHUD (0.9.1)
-  - MWPhotoBrowser (1.4.1):
-    - DACircularProgress
-    - MBProgressHUD (~> 0.8)
-    - PSTCollectionView (~> 1.2)
-    - SDWebImage (~> 3.7)
   - PSTCollectionView (1.2.3)
   - SDWebImage (3.7.2):
     - SDWebImage/Core
@@ -36,9 +31,11 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.0)
+  - DACircularProgress
   - HTMLReader
   - JSONKit (~> 1.5pre)
-  - MWPhotoBrowser
+  - MBProgressHUD
+  - PSTCollectionView
   - SDWebImage (~> 3.7.1)
 
 SPEC CHECKSUMS:
@@ -47,7 +44,6 @@ SPEC CHECKSUMS:
   HTMLReader: e6ba09514d125f45e810b6c6c1cebf3542f04d89
   JSONKit: bae313ce6a6c444f40489a6c0b023f399888871f
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  MWPhotoBrowser: 2531e682860d62b8a7ba8659de02eb9040e431e5
   PSTCollectionView: 6749df92885353521f55279a7ce2b293762e2be4
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
 

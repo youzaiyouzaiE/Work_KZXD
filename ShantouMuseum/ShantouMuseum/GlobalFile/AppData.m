@@ -85,8 +85,8 @@
     [RequestWrapper getRequestWithURL:REQUEST_CONTENT_URL_STR(channelID)
                        withParameters:nil
                               success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-                                  NSString *responsString = operation.responseString;
-                                                                  NSArray *arrayContentNodes = [self analysisDataFormJsonString:responsString];
+//                                  NSString *responsString = operation.responseString;
+//                                                                  NSArray *arrayContentNodes = [self analysisDataFormJsonString:responsString];
 //                                                                    [[NSUserDefaults standardUserDefaults] rm_setCustomObject:arrayLeafs forKey:LEAF_USER_DEFAULT(channelID)];
 //                                                                    [self performSegueWithIdentifier:@"MainPushToLeafVC" sender:self];
                               }
