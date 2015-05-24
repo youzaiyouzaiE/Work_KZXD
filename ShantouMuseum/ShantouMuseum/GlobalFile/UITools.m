@@ -7,6 +7,7 @@
 //
 
 #import "UITools.h"
+#import "ChannelTree.h"
 
 @interface UITools  (){
     UIAlertView *_autoDismissAlert;
@@ -90,6 +91,33 @@ SHARE_INSTANCET(UITools)
     }
     NSString *filePath = [pathName stringByAppendingPathComponent:fileName];
     return [imgData writeToFile:filePath atomically:YES];
+}
+
++ (NSString *)getImageNameForContentImg:(NSString *)imageUrl {
+    NSArray *array =[imageUrl componentsSeparatedByString:@"/"];
+    NSString *string = @"";
+    for (NSString *str in array) {
+        string = [string stringByAppendingString:str];
+    }
+    return string;
+}
+
++ (NSString *)getSavePathFormLeafNod:(ChannelTree *)leafNod {
+    NSMutableArray *nameArray = [NSMutableArray array];
+    while (leafNod.parent != nil) {
+        if (leafNod.name != nil) {
+            [nameArray addObject:leafNod.name];
+        }
+        leafNod = leafNod.parent;
+    }
+    if (leafNod.parent == nil && leafNod.name != nil) {
+        [nameArray addObject:leafNod.name];
+    }
+    NSString *pathName = @"";
+    for (NSInteger i = nameArray.count -1; i >= 0; i--) {
+        pathName = [pathName stringByAppendingPathComponent:nameArray[i]];
+    }
+    return pathName;
 }
 
 #pragma mark- NavigationSet

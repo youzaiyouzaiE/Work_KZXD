@@ -170,6 +170,11 @@
                                                              if (error) {
                                                                  MWLog(@"SDWebImage failed to download image: %@", error);
                                                              }
+                                                             if ([[UITools getInstancet] saveImageToFileParth:_saveImagePath image:image inFileName:_saveName]) {
+//                                                                 NSLog(@"save success");
+                                                             } else {
+//                                                                 NSLog(@"save fail");
+                                                             }
                                                              _webImageOperation = nil;
                                                              self.underlyingImage = image;
                                                              [self imageLoadingComplete];

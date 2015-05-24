@@ -36,15 +36,25 @@
     _photos = [NSMutableArray array];
     _thumbs = [NSMutableArray array];
     
+    NSString *savePath = [UITools getSavePathFormLeafNod:self.fatherChannel];
     for (ContentNode *nodeLeaf in _arrayContents) {
         if (nodeLeaf.isImg && nodeLeaf.images !=nil) {/////显示Imgs里的内容
-            NSLog(@"显示Imgs里的内容");
-            
+//            NSLog(@"显示Imgs里的内容");
         } else if (!nodeLeaf.isImg && nodeLeaf.contentImg != nil){
-            MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(nodeLeaf.contentImg)]];
+            MWPhoto *photo;
+            NSString *documentPath = [[UITools getInstancet] pathForDocumentName:[UITools getSavePathFormLeafNod:self.fatherChannel]];
+            NSString *imagePath = [documentPath stringByAppendingPathComponent:[UITools getImageNameForContentImg:nodeLeaf.contentImg]];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+                UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+                photo = [MWPhoto photoWithImage:image];
+            } else {
+                photo = [MWPhoto photoWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(nodeLeaf.contentImg)]];
+            }
+            photo.saveName = [UITools getImageNameForContentImg:nodeLeaf.contentImg];
+            photo.saveImagePath = savePath;
             photo.caption = nodeLeaf.desc;
             [_photos addObject:photo];
-            [_thumbs addObject:[MWPhoto photoWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(nodeLeaf.contentImg)]]];
+            [_thumbs addObject:photo];
         }
     }
 }
@@ -53,8 +63,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 #pragma mark - UItableDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -100,16 +108,20 @@
         UILabel *labelTitle = (UILabel *)[cell viewWithTag:2];
         UILabel *labelDesction = (UILabel *)[cell viewWithTag:3];
         
-        [imageView sd_setImageWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(currentNod.contentImg)]
-                          placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                                      NSLog(@"图片加载完成！");
-                                     if ([[UITools getInstancet] saveImageToFileParth:[self getPathString:self.fatherChannel] image:image inFileName:[self getImageName:currentNod.contentImg]]) {
-//                                          NSLog(@"save success");
-                                     } else {
-//                                          NSLog(@"save fail");
-                                     }
-                                 }];
+        NSString *documentPath = [[UITools getInstancet] pathForDocumentName:[UITools getSavePathFormLeafNod:self.fatherChannel]];
+        NSString *imagePath = [documentPath stringByAppendingPathComponent:[UITools getImageNameForContentImg:currentNod.contentImg]];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+            imageView.image = [UIImage imageWithContentsOfFile:imagePath];
+        } else
+            [imageView sd_setImageWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(currentNod.contentImg)]
+                         placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                    if ([[UITools getInstancet] saveImageToFileParth:[UITools getSavePathFormLeafNod:self.fatherChannel] image:image inFileName:[UITools getImageNameForContentImg:currentNod.contentImg]]) {
+                                        NSLog(@"save success");
+                                    } else {
+                                        NSLog(@"save fail");
+                                    }
+                                }];
         labelTitle.text = currentNod.title;
         labelDesction.text = currentNod.desc;
         
@@ -122,43 +134,28 @@
     return cell;
 }
 
-- (NSString *)getImageName:(NSString *)imageUrl {
-    NSArray *array =[imageUrl componentsSeparatedByString:@"/"];
-    NSString *string = @"";
-    for (NSString *str in array) {
-        string = [string stringByAppendingString:str];
-    }
-    return string;
-}
-
-- (NSString *)getPathString:(ChannelTree *)leafNod {
-    NSMutableArray *nameArray = [NSMutableArray array];
-    while (leafNod.parent != nil) {
-        if (leafNod.name != nil) {
-            [nameArray addObject:leafNod.name];
-        }
-        leafNod = leafNod.parent;
-    }
-    if (leafNod.parent == nil && leafNod.name != nil) {
-        [nameArray addObject:leafNod.name];
-    }
-    NSString *pathName = @"";
-    for (NSInteger i = nameArray.count -1; i >= 0; i--) {
-        pathName = [pathName stringByAppendingPathComponent:nameArray[i]];
-    }
-    return pathName;
-}
-
 #pragma mark - UItableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSString *savePath = [UITools getSavePathFormLeafNod:self.fatherChannel];
     selectNod = _arrayContents[indexPath.row];
-   
+    if (selectNod.isImg) {
+        savePath = [savePath stringByAppendingPathComponent:selectNod.title];
+    }
         if (selectNod.isImg && selectNod.images !=nil) {////显示子节点里的图片
-//         NSLog(@"显示 imgs = %ld",[selectNod.images count]);
         [_photos removeAllObjects];
         for (Image *image in selectNod.images) {
-            MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(image.url)]];
+            MWPhoto *photo;
+            NSString *documentPath = [[UITools getInstancet] pathForDocumentName:savePath];
+            NSString *imagePath = [documentPath stringByAppendingPathComponent:[UITools getImageNameForContentImg:image.url]];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+                UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+                photo = [MWPhoto photoWithImage:image];
+            } else {
+                photo = [MWPhoto photoWithURL:[NSURL URLWithString:IMAGE_ROAD_URL_STR(image.url)]];
+            }
+            photo.saveImagePath = savePath;
+            photo.saveName = [UITools getImageNameForContentImg:image.url];
             photo.caption = image.desc;
             [_photos addObject:photo];
         }
@@ -181,7 +178,7 @@
         [browser setCurrentPhotoIndex:indexPath.row];
         [self.navigationController pushViewController:browser animated:YES];
         
-    } else if (!selectNod.isImg && selectNod.contentImg != nil) {///对应List里的图片
+    } else if (!selectNod.isImg && selectNod.contentImg != nil) {///对应List里的图片 带相册的
         BOOL displayActionButton = NO;////分享
         BOOL displaySelectionButtons = NO;
         BOOL displayNavArrows = NO;

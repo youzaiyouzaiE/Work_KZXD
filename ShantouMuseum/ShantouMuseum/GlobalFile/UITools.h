@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+@class ChannelTree;
 
 @interface UITools : NSObject
 
@@ -21,8 +21,11 @@
 + (void)setNavigationLeftButtonTitle:(NSString *)leftBtnStr leftAction:(SEL)action rightBtnStr:(NSString *)rightBtnStr rightAction:(SEL)rightAction rightBtnSelected:(NSString *)rightBtnStateName navigationTitleStr:(NSString *)title forViewController:(UIViewController *)controller;
 
 
+#pragma UIDate
 - (NSString *)pathForDocumentName:(NSString *)documentName;
 - (BOOL)saveImageToFileParth:parth image:(UIImage *)image inFileName:(NSString *)fileName;
-+ (NSArray *)getFilesInDocumentPath:(NSString *)path ;
+//+ (NSArray *)getFilesInDocumentPath:(NSString *)path;
++ (NSString *)getImageNameForContentImg:(NSString *)imageUrl;
++ (NSString *)getSavePathFormLeafNod:(ChannelTree *)leafNod;
 
 @end
