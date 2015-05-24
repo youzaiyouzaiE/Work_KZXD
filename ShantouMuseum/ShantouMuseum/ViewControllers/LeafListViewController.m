@@ -39,7 +39,7 @@
     NSString *savePath = [UITools getSavePathFormLeafNod:self.fatherChannel];
     for (ContentNode *nodeLeaf in _arrayContents) {
         if (nodeLeaf.isImg && nodeLeaf.images !=nil) {/////显示Imgs里的内容
-//            NSLog(@"显示Imgs里的内容");
+            
         } else if (!nodeLeaf.isImg && nodeLeaf.contentImg != nil){
             MWPhoto *photo;
             NSString *documentPath = [[UITools getInstancet] pathForDocumentName:[UITools getSavePathFormLeafNod:self.fatherChannel]];
@@ -158,11 +158,12 @@
             photo.saveName = [UITools getImageNameForContentImg:image.url];
             photo.caption = image.desc;
             [_photos addObject:photo];
+            [_thumbs addObject:photo];
         }
         BOOL displayActionButton = NO;////分享
         BOOL displaySelectionButtons = NO;
         BOOL displayNavArrows = NO;
-        BOOL enableGrid = NO;
+        BOOL enableGrid = YES;////显示Toolbar
         BOOL startOnGrid = NO;
         MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
         browser.displayActionButton = displayActionButton;
