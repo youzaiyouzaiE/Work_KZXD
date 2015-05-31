@@ -45,7 +45,6 @@
 		DAB588601B039348009AE32A /* WebContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB5885F1B039348009AE32A /* WebContentViewController.m */; };
 		DABD0ACD1B1B06EB008D9015 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABD0ACC1B1B06EB008D9015 /* AVFoundation.framework */; };
 		DABD0AD01B1B0726008D9015 /* ScanBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DABD0ACF1B1B0726008D9015 /* ScanBarViewController.m */; };
-		DABD0AD41B1B1076008D9015 /* RectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = DABD0AD31B1B1076008D9015 /* RectangleView.m */; };
 		DABD0AD71B1B25C6008D9015 /* ScanWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = DABD0AD61B1B25C6008D9015 /* ScanWebView.m */; };
 		DACF15731B04DA07005445C4 /* ImageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF15721B04DA07005445C4 /* ImageListViewController.m */; };
 		DACF16741B074749005445C4 /* NSObject+RMArchivable.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF166D1B074749005445C4 /* NSObject+RMArchivable.m */; };
@@ -142,8 +141,6 @@
 		DABD0ACC1B1B06EB008D9015 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DABD0ACE1B1B0726008D9015 /* ScanBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanBarViewController.h; sourceTree = "<group>"; };
 		DABD0ACF1B1B0726008D9015 /* ScanBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanBarViewController.m; sourceTree = "<group>"; };
-		DABD0AD21B1B1076008D9015 /* RectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectangleView.h; sourceTree = "<group>"; };
-		DABD0AD31B1B1076008D9015 /* RectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectangleView.m; sourceTree = "<group>"; };
 		DABD0AD51B1B25C6008D9015 /* ScanWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanWebView.h; sourceTree = "<group>"; };
 		DABD0AD61B1B25C6008D9015 /* ScanWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanWebView.m; sourceTree = "<group>"; };
 		DACF15711B04DA07005445C4 /* ImageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageListViewController.h; sourceTree = "<group>"; };
@@ -291,7 +288,6 @@
 				DA855EDF1AF8FFB5005CF033 /* AppDelegate.m */,
 				DA855EE41AF8FFB5005CF033 /* Main.storyboard */,
 				DA855F011AF9038B005CF033 /* ViewControllers */,
-				DABD0AD11B1B1031008D9015 /* Views */,
 				DA95986B1AFF8B4200D49D42 /* CustomUIS */,
 				DA82AFDC1AFE223A0088BF7A /* Model */,
 				DA85605A1AF90760005CF033 /* GlobalFile */,
@@ -403,15 +399,6 @@
 			name = CustomUIS;
 			path = ShantouMuseum/CustomUIS;
 			sourceTree = SOURCE_ROOT;
-		};
-		DABD0AD11B1B1031008D9015 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				DABD0AD21B1B1076008D9015 /* RectangleView.h */,
-				DABD0AD31B1B1076008D9015 /* RectangleView.m */,
-			);
-			path = Views;
-			sourceTree = "<group>";
 		};
 		DACF166B1B074749005445C4 /* RMMapper */ = {
 			isa = PBXGroup;
@@ -597,7 +584,6 @@
 				DA7867271B0B845B005414A7 /* TFHpple.m in Sources */,
 				DA9598AE1B02273E00D49D42 /* LeafListViewController.m in Sources */,
 				DA855EDD1AF8FFB5005CF033 /* main.m in Sources */,
-				DABD0AD41B1B1076008D9015 /* RectangleView.m in Sources */,
 				DA82AFDF1AFE22980088BF7A /* ChannelTree.m in Sources */,
 				DA8560691AF90760005CF033 /* GlobalInstance.m in Sources */,
 			);

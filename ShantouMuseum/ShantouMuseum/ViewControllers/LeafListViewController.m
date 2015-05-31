@@ -33,6 +33,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = _fatherChannel.name;
+//    [UITools navigationBackButtonTitle:@"" action:@selector(backAction:) target:self];
     _photos = [NSMutableArray array];
     _thumbs = [NSMutableArray array];
     
@@ -62,6 +63,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)backAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UItableDataSource

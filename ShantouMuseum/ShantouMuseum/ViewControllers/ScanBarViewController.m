@@ -8,6 +8,7 @@
 
 #import "ScanBarViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "ScanWebView.h"
 
 @interface ScanBarViewController () <AVCaptureMetadataOutputObjectsDelegate> {
     AVCaptureSession *_session;
@@ -17,8 +18,8 @@
     AVCaptureVideoPreviewLayer *_prevLayer;
     
     UILabel *_label;
-
-    BOOL upOrdown;
+    NSTimer *timer;
+//    BOOL upOrdown;
     UIImageView *line;
     NSInteger num;
     CALayer *layer;
@@ -94,7 +95,7 @@
     [self.view addSubview:line];
     
     self.view.backgroundColor = [UIColor colorWithWhite:0.15 alpha:0.65];
-    [NSTimer scheduledTimerWithTimeInterval:.2 target:self selector:@selector(animation) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:.2 target:self selector:@selector(animation) userInfo:nil repeats:YES];
 }
 
 -(void)animation
@@ -111,6 +112,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
 {
     CGRect highlightViewRect = CGRectZero;
@@ -134,12 +136,16 @@
         if (detectionString != nil)
         {
             _label.text = detectionString;
+            ScanWebView *webVC = [[ScanWebView alloc] init];
+            webVC.urlString = detectionString;
+            [self.navigationController pushViewController:webVC animated:YES];
+            [_session stopRunning];
+            [timer invalidate];
             break;
         }
         else
             _label.text = @"(none)";
     }
-    
 //    _highlightView.frame = highlightViewRect;
 }
 
