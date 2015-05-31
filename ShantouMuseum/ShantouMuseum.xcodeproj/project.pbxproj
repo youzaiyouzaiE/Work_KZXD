@@ -26,7 +26,7 @@
 		DA855EDD1AF8FFB5005CF033 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA855EDC1AF8FFB5005CF033 /* main.m */; };
 		DA855EE01AF8FFB5005CF033 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA855EDF1AF8FFB5005CF033 /* AppDelegate.m */; };
 		DA855EE61AF8FFB5005CF033 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA855EE41AF8FFB5005CF033 /* Main.storyboard */; };
-		DA855EE81AF8FFB5005CF033 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA855EE71AF8FFB5005CF033 /* Images.xcassets */; };
+		DA855EE81AF8FFB5005CF033 /* l.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA855EE71AF8FFB5005CF033 /* l.xcassets */; };
 		DA855EEB1AF8FFB5005CF033 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA855EE91AF8FFB5005CF033 /* LaunchScreen.xib */; };
 		DA855EF71AF8FFB5005CF033 /* ShantouMuseumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA855EF61AF8FFB5005CF033 /* ShantouMuseumTests.m */; };
 		DA855F041AF903F3005CF033 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA855F031AF903F3005CF033 /* MainViewController.m */; };
@@ -43,6 +43,10 @@
 		DA9598AE1B02273E00D49D42 /* LeafListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9598AD1B02273E00D49D42 /* LeafListViewController.m */; };
 		DA9598B41B02418900D49D42 /* ChildTrunkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9598B31B02418900D49D42 /* ChildTrunkViewController.m */; };
 		DAB588601B039348009AE32A /* WebContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB5885F1B039348009AE32A /* WebContentViewController.m */; };
+		DABD0ACD1B1B06EB008D9015 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABD0ACC1B1B06EB008D9015 /* AVFoundation.framework */; };
+		DABD0AD01B1B0726008D9015 /* ScanBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DABD0ACF1B1B0726008D9015 /* ScanBarViewController.m */; };
+		DABD0AD41B1B1076008D9015 /* RectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = DABD0AD31B1B1076008D9015 /* RectangleView.m */; };
+		DABD0AD71B1B25C6008D9015 /* ScanWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = DABD0AD61B1B25C6008D9015 /* ScanWebView.m */; };
 		DACF15731B04DA07005445C4 /* ImageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF15721B04DA07005445C4 /* ImageListViewController.m */; };
 		DACF16741B074749005445C4 /* NSObject+RMArchivable.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF166D1B074749005445C4 /* NSObject+RMArchivable.m */; };
 		DACF16751B074749005445C4 /* NSObject+RMCopyable.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF166F1B074749005445C4 /* NSObject+RMCopyable.m */; };
@@ -100,7 +104,7 @@
 		DA855EDE1AF8FFB5005CF033 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DA855EDF1AF8FFB5005CF033 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		DA855EE51AF8FFB5005CF033 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DA855EE71AF8FFB5005CF033 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DA855EE71AF8FFB5005CF033 /* l.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = l.xcassets; sourceTree = "<group>"; };
 		DA855EEA1AF8FFB5005CF033 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		DA855EF01AF8FFB5005CF033 /* ShantouMuseumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShantouMuseumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA855EF51AF8FFB5005CF033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -135,6 +139,13 @@
 		DA9598B31B02418900D49D42 /* ChildTrunkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTrunkViewController.m; sourceTree = "<group>"; };
 		DAB5885E1B039348009AE32A /* WebContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebContentViewController.h; sourceTree = "<group>"; };
 		DAB5885F1B039348009AE32A /* WebContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebContentViewController.m; sourceTree = "<group>"; };
+		DABD0ACC1B1B06EB008D9015 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DABD0ACE1B1B0726008D9015 /* ScanBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanBarViewController.h; sourceTree = "<group>"; };
+		DABD0ACF1B1B0726008D9015 /* ScanBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanBarViewController.m; sourceTree = "<group>"; };
+		DABD0AD21B1B1076008D9015 /* RectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectangleView.h; sourceTree = "<group>"; };
+		DABD0AD31B1B1076008D9015 /* RectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectangleView.m; sourceTree = "<group>"; };
+		DABD0AD51B1B25C6008D9015 /* ScanWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanWebView.h; sourceTree = "<group>"; };
+		DABD0AD61B1B25C6008D9015 /* ScanWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanWebView.m; sourceTree = "<group>"; };
 		DACF15711B04DA07005445C4 /* ImageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageListViewController.h; sourceTree = "<group>"; };
 		DACF15721B04DA07005445C4 /* ImageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageListViewController.m; sourceTree = "<group>"; };
 		DACF166C1B074749005445C4 /* NSObject+RMArchivable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RMArchivable.h"; sourceTree = "<group>"; };
@@ -153,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DABD0ACD1B1B06EB008D9015 /* AVFoundation.framework in Frameworks */,
 				DA78672A1B0B848C005414A7 /* libxml2.dylib in Frameworks */,
 				DA8560591AF9072F005CF033 /* libz.dylib in Frameworks */,
 				93FBEC0F9FB5C1F6A170CD27 /* libPods.a in Frameworks */,
@@ -181,6 +193,7 @@
 		C612A389BEEBD59261E30852 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DABD0ACC1B1B06EB008D9015 /* AVFoundation.framework */,
 				DA78671E1B0B8224005414A7 /* libxml2.2.dylib */,
 				E3547644B5CC57DAC93F853C /* libPods.a */,
 			);
@@ -278,10 +291,11 @@
 				DA855EDF1AF8FFB5005CF033 /* AppDelegate.m */,
 				DA855EE41AF8FFB5005CF033 /* Main.storyboard */,
 				DA855F011AF9038B005CF033 /* ViewControllers */,
+				DABD0AD11B1B1031008D9015 /* Views */,
 				DA95986B1AFF8B4200D49D42 /* CustomUIS */,
 				DA82AFDC1AFE223A0088BF7A /* Model */,
 				DA85605A1AF90760005CF033 /* GlobalFile */,
-				DA855EE71AF8FFB5005CF033 /* Images.xcassets */,
+				DA855EE71AF8FFB5005CF033 /* l.xcassets */,
 				DA855EE91AF8FFB5005CF033 /* LaunchScreen.xib */,
 				DA855EDA1AF8FFB5005CF033 /* Supporting Files */,
 			);
@@ -322,6 +336,10 @@
 				DA82AFE51AFF621E0088BF7A /* WelcomeViewController.m */,
 				DA855F021AF903F3005CF033 /* MainViewController.h */,
 				DA855F031AF903F3005CF033 /* MainViewController.m */,
+				DABD0ACE1B1B0726008D9015 /* ScanBarViewController.h */,
+				DABD0ACF1B1B0726008D9015 /* ScanBarViewController.m */,
+				DABD0AD51B1B25C6008D9015 /* ScanWebView.h */,
+				DABD0AD61B1B25C6008D9015 /* ScanWebView.m */,
 				DA95987D1B00FCDD00D49D42 /* TrunkViewController.h */,
 				DA95987E1B00FCDD00D49D42 /* TrunkViewController.m */,
 				DA9598B21B02418900D49D42 /* ChildTrunkViewController.h */,
@@ -385,6 +403,15 @@
 			name = CustomUIS;
 			path = ShantouMuseum/CustomUIS;
 			sourceTree = SOURCE_ROOT;
+		};
+		DABD0AD11B1B1031008D9015 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DABD0AD21B1B1076008D9015 /* RectangleView.h */,
+				DABD0AD31B1B1076008D9015 /* RectangleView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
 		};
 		DACF166B1B074749005445C4 /* RMMapper */ = {
 			isa = PBXGroup;
@@ -485,7 +512,7 @@
 			files = (
 				DA855EE61AF8FFB5005CF033 /* Main.storyboard in Resources */,
 				DA855EEB1AF8FFB5005CF033 /* LaunchScreen.xib in Resources */,
-				DA855EE81AF8FFB5005CF033 /* Images.xcassets in Resources */,
+				DA855EE81AF8FFB5005CF033 /* l.xcassets in Resources */,
 				DA7867491B10C286005414A7 /* MWPhotoBrowser.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,6 +575,7 @@
 				DACF16741B074749005445C4 /* NSObject+RMArchivable.m in Sources */,
 				DACF16771B074749005445C4 /* RMMapper.m in Sources */,
 				DACF16761B074749005445C4 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
+				DABD0AD01B1B0726008D9015 /* ScanBarViewController.m in Sources */,
 				DA7867471B10C286005414A7 /* MWTapDetectingView.m in Sources */,
 				DA855EE01AF8FFB5005CF033 /* AppDelegate.m in Sources */,
 				DA82AFE61AFF621E0088BF7A /* WelcomeViewController.m in Sources */,
@@ -558,6 +586,7 @@
 				DACF15731B04DA07005445C4 /* ImageListViewController.m in Sources */,
 				DA9598B41B02418900D49D42 /* ChildTrunkViewController.m in Sources */,
 				DA8560681AF90760005CF033 /* DataTools.m in Sources */,
+				DABD0AD71B1B25C6008D9015 /* ScanWebView.m in Sources */,
 				DA85606A1AF90760005CF033 /* RequestWrapper.m in Sources */,
 				DA9598711AFF939E00D49D42 /* Image.m in Sources */,
 				DA85606B1AF90760005CF033 /* UITools.m in Sources */,
@@ -568,6 +597,7 @@
 				DA7867271B0B845B005414A7 /* TFHpple.m in Sources */,
 				DA9598AE1B02273E00D49D42 /* LeafListViewController.m in Sources */,
 				DA855EDD1AF8FFB5005CF033 /* main.m in Sources */,
+				DABD0AD41B1B1076008D9015 /* RectangleView.m in Sources */,
 				DA82AFDF1AFE22980088BF7A /* ChannelTree.m in Sources */,
 				DA8560691AF90760005CF033 /* GlobalInstance.m in Sources */,
 			);

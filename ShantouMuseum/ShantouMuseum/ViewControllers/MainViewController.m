@@ -17,6 +17,7 @@
 
 #import "TrunkViewController.h"
 #import "LeafListViewController.h"
+#import "ScanBarViewController.h"
 
 @interface MainViewController () <CollectionViewDelegateTripletLayout,UICollectionViewDataSource,UICollectionViewDelegate,UIWebViewDelegate,wecomViewControllDelegate> {
     
@@ -39,7 +40,7 @@
 //     NSLog(@"%@",self.fristChannelTree.name);
     
     
-    [UITools setNavigationLeftButtonTitle:nil leftAction:nil rightBtnStr:nil rightAction:nil rightBtnSelected:nil navigationTitleStr:@"汕头海关网上关史陈列馆" forViewController:self];
+    [UITools setNavigationLeftButtonTitle:nil leftAction:nil rightBtnStr:@"扫描" rightAction:@selector(scanBarAction:) rightBtnSelected:nil navigationTitleStr:@"汕头海关网上关史陈列馆" forViewController:self];
     self.navigationItem.title = @"汕头海关网上关史陈列馆";
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
@@ -57,6 +58,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+}
+
+- (void)scanBarAction:(id)sender
+{
+    ScanBarViewController *scanBarVC = [[ScanBarViewController alloc] init];
+    [self.navigationController pushViewController:scanBarVC animated:YES];
 }
 
 - (void)getDataFormServer:(NSMutableArray *)nodeArray andFristNode:(ChannelTree *)fristNode{
