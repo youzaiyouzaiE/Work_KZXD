@@ -31,7 +31,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    line.hidden = NO;
+//    line.hidden = NO;
 }
 
 #define LAYER_W     200

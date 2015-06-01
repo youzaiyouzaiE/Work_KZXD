@@ -16,9 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainViewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="SY0-Xo-UBL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EHc-Kk-aHX">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewLayout key="collectionViewLayout" id="QLR-p9-x8q" customClass="CollectionTripletLayout"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="reuseIdentifierItem" id="5kQ-J4-tRx">
@@ -58,7 +61,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="EHc-Kk-aHX" secondAttribute="trailing" id="2jS-TS-7Rs"/>
+                            <constraint firstAttribute="trailing" secondItem="SY0-Xo-UBL" secondAttribute="trailing" id="EJ5-FC-zsP"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="SY0-Xo-UBL" secondAttribute="bottom" id="HTp-Mn-TeM"/>
+                            <constraint firstItem="SY0-Xo-UBL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="NXi-RO-AXK"/>
                             <constraint firstItem="EHc-Kk-aHX" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="Te3-9w-S0I"/>
+                            <constraint firstItem="SY0-Xo-UBL" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="Y3V-uc-cJw"/>
                             <constraint firstItem="EHc-Kk-aHX" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="hfN-tx-4K1"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="EHc-Kk-aHX" secondAttribute="bottom" id="qSI-Ui-dbl"/>
                         </constraints>
@@ -424,6 +431,9 @@
             <point key="canvasLocation" x="-155" y="508"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="mainViewBackground" width="198" height="261"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

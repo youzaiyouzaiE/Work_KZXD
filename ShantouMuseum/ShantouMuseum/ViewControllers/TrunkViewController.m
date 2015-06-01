@@ -27,7 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    ChannelTree *fristChannel = _arrayChannels[0];
+    self.navigationItem.title = fristChannel.parent.name;
 }
 
 - (void)didReceiveMemoryWarning {

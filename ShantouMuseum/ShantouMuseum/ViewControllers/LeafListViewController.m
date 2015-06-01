@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.1
     self.navigationItem.title = _fatherChannel.name;
 //    [UITools navigationBackButtonTitle:@"" action:@selector(backAction:) target:self];
     _photos = [NSMutableArray array];

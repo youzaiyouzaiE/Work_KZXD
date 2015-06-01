@@ -19,7 +19,7 @@
 #import "LeafListViewController.h"
 #import "ScanBarViewController.h"
 
-@interface MainViewController () <CollectionViewDelegateTripletLayout,UICollectionViewDataSource,UICollectionViewDelegate,UIWebViewDelegate,wecomViewControllDelegate> {
+@interface MainViewController () <CollectionViewDelegateTripletLayout,UICollectionViewDataSource,UICollectionViewDelegate,UIWebViewDelegate,wecomViewControllDelegate,UIGestureRecognizerDelegate> {
     
     ChannelTree *selectChannel;
     NSArray *arrayLeafs;
@@ -36,17 +36,20 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
 //     NSLog(@"%@",self.fristChannelTree.name);
-    
-    
-    [UITools setNavigationLeftButtonTitle:nil leftAction:nil rightBtnStr:@"扫描" rightAction:@selector(scanBarAction:) rightBtnSelected:nil navigationTitleStr:@"汕头海关网上关史陈列馆" forViewController:self];
-    self.navigationItem.title = @"汕头海关网上关史陈列馆";
-    
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+//    [UITools setNavigationLeftButtonTitle:nil leftAction:nil rightBtnStr:@"扫描" rightAction:@selector(scanBarAction:) rightBtnSelected:nil navigationTitleStr:@"汕头海关网上关史陈列馆" forViewController:self];
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:70.0f/255.0f green:50.0f/255.0f blue:42.0f/255.0f alpha:0.5];///backGround coloud
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];/////titletTextColor
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.title = @"汕头海关网上关史陈列馆";
+}
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 
 - (void)loadView {
@@ -61,7 +64,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.navigationController.navigationBarHidden = NO;
+    
+    if (IOS_7LAST) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    }
+    
+//    CALayer *imageLayer = [CALayer layer];
+//    imageLayer.frame = self.view.frame;
+//    imageLayer.cornerRadius = 10;
+//    imageLayer.contents = (id)[UIImage imageNamed:@"mainViewBackground"].CGImage;
+// 
+//    [self.view.layer addSublayer:imageLayer];
+}
 
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if (self.navigationController.viewControllers.count == 1) {//关闭主界面的右滑返回
+        return NO;
+    }  else {
+        return YES;
+    }
 }
 
 - (void)scanBarAction:(id)sender
@@ -132,14 +155,14 @@
 
 #pragma mark -RACollectionViewDelegateTripletLayout
 - (UIEdgeInsets)insetsForCollectionView:(UICollectionView *)collectionView{
-    return UIEdgeInsetsMake(10, 20, 10, 20);
+    return UIEdgeInsetsMake(10, 20, 20, 20);
 }
 
 - (CGFloat)sectionSpacingForCollectionView:(UICollectionView *)collectionView {
     return 10;
 }
 - (CGFloat)minimumInteritemSpacingForCollectionView:(UICollectionView *)collectionView {
-    return 10;
+    return 20;
 }
 - (CGFloat)minimumLineSpacingForCollectionView:(UICollectionView *)collectionView {
     return 20;
