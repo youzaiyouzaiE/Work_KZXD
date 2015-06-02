@@ -46,6 +46,13 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];/////titletTextColor
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.title = @"汕头海关网上关史陈列馆";
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]
+                                   initWithTitle: @"扫描"
+                                   style:UIBarButtonItemStylePlain
+                                   target:self
+                                   action:@selector(scanBarAction:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

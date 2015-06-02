@@ -19,7 +19,7 @@
     
     UILabel *_label;
     NSTimer *timer;
-//    BOOL upOrdown;
+    BOOL isStopMove;
     UIImageView *line;
     NSInteger num;
     CALayer *layer;
@@ -29,10 +29,6 @@
 
 @implementation ScanBarViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-//    line.hidden = NO;
-}
 
 #define LAYER_W     200
 #define LAYER_H     200
@@ -49,6 +45,7 @@
     _label.text = @"(none)";
     [self.view addSubview:_label];
     
+
     _session = [[AVCaptureSession alloc] init];
     _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     NSError *error = nil;
@@ -69,17 +66,17 @@
     _prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [self.view.layer addSublayer:_prevLayer];
     [_session startRunning];
-    
     [self.view bringSubviewToFront:_label];
     
     layer = [CALayer layer];
     layer.backgroundColor = [UIColor clearColor].CGColor;
-    layer.bounds = CGRectMake(0, 0, LAYER_W, LAYER_H);
-    layer.position = self.view.center;
+    layer.frame = CGRectMake((self.view.frame.size.width - LAYER_W)/2 , 100, LAYER_W, LAYER_H);
     layer.borderColor = [UIColor whiteColor].CGColor;
     layer.borderWidth = 1;
-    layer.delegate = self;
     [self.view.layer addSublayer:layer];
+    
+//    CGSize size = self.view.bounds.size;
+//     [_output setRectOfInterest:CGRectMake(layer.frame.origin.y/size.height, layer.frame.origin.x/size.width, layer.bounds.size.height/size.width, layer.bounds.size.width/size.height)];
     
     UILabel *textLabl = [[UILabel alloc] initWithFrame:CGRectMake(layer.frame.origin.x, layer.frame.origin.y + LAYER_H + 5, layer.frame.size.width, 80)];
     textLabl.textColor = [UIColor whiteColor];
@@ -87,29 +84,25 @@
     textLabl.text = @"将二维码放入框内，即可扫描";
     textLabl.font = [UIFont systemFontOfSize:15];
     [self.view addSubview:textLabl];
-    
     num = 2;
     line = [[UIImageView alloc] init];
     line.frame = CGRectMake(layer.frame.origin.x, layer.frame.origin.y + 4, 200, 2);
     line.image = [UIImage imageNamed:@"line.png"];
     [self.view addSubview:line];
-    
     self.view.backgroundColor = [UIColor colorWithWhite:0.15 alpha:0.65];
     timer = [NSTimer scheduledTimerWithTimeInterval:.2 target:self selector:@selector(animation) userInfo:nil repeats:YES];
 }
 
 -(void)animation
 {
-    num ++;
-    line.frame = CGRectMake(line.frame.origin.x, line.frame.origin.y + 2*num, 200, 2);
-    if (line.frame.origin.y >= layer.frame.origin.y + LAYER_H - 4) {
-        num = 0;
-        line.frame = CGRectMake(layer.frame.origin.x, layer.frame.origin.y + 4, 200, 2);
+    if (!isStopMove) {
+        num ++;
+        line.frame = CGRectMake(line.frame.origin.x, line.frame.origin.y + 2*num, 200, 2);
+        if (line.frame.origin.y >= layer.frame.origin.y + LAYER_H - 4) {
+            num = 0;
+            line.frame = CGRectMake(layer.frame.origin.x, layer.frame.origin.y + 4, 200, 2);
+        }
     }
-}
-
--(void)backAction {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark AVCaptureMetadataOutputObjectsDelegate
@@ -140,7 +133,7 @@
             webVC.urlString = detectionString;
             [self.navigationController pushViewController:webVC animated:YES];
             [_session stopRunning];
-            [timer invalidate];
+            isStopMove = YES;
             break;
         }
         else
