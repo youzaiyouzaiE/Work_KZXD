@@ -75,8 +75,8 @@
     layer.borderWidth = 1;
     [self.view.layer addSublayer:layer];
     
-//    CGSize size = self.view.bounds.size;
-//     [_output setRectOfInterest:CGRectMake(layer.frame.origin.y/size.height, layer.frame.origin.x/size.width, layer.bounds.size.height/size.width, layer.bounds.size.width/size.height)];
+    CGSize size = [UIScreen mainScreen].bounds.size;
+    [_output setRectOfInterest:CGRectMake(100/size.height, (self.view.frame.size.width - LAYER_W)/2/size.width, LAYER_W/size.height, LAYER_W/size.width)];
     
     UILabel *textLabl = [[UILabel alloc] initWithFrame:CGRectMake(layer.frame.origin.x, layer.frame.origin.y + LAYER_H + 5, layer.frame.size.width, 80)];
     textLabl.textColor = [UIColor whiteColor];
