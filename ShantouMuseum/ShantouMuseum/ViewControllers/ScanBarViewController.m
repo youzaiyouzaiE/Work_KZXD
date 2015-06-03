@@ -35,14 +35,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.navigationItem.title = @"二维码";
     _label = [[UILabel alloc] init];
     _label.frame = CGRectMake(0, self.view.bounds.size.height - 40, self.view.bounds.size.width, 40);
     _label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     _label.backgroundColor = [UIColor colorWithWhite:0.15 alpha:0.65];
     _label.textColor = [UIColor whiteColor];
     _label.textAlignment = NSTextAlignmentCenter;
-    _label.text = @"(none)";
+    _label.text = @" ";
     [self.view addSubview:_label];
     
 

@@ -68,8 +68,7 @@
                  }
              }];
         }
-    }
-
+    }    
     [self.webView loadHTMLString:htmlString baseURL:nil];
     self.webView.scalesPageToFit = YES;
     // Do any additional setup after loading the view.

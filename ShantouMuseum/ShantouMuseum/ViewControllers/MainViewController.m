@@ -13,11 +13,10 @@
 #import "WelcomeViewController.h"
 #import "Image.h"
 #import "ContentNode.h"
-//#import "NSUserDefaults+RMSaveCustomObject.h"
-
 #import "TrunkViewController.h"
 #import "LeafListViewController.h"
 #import "ScanBarViewController.h"
+
 
 @interface MainViewController () <CollectionViewDelegateTripletLayout,UICollectionViewDataSource,UICollectionViewDelegate,UIWebViewDelegate,wecomViewControllDelegate,UIGestureRecognizerDelegate> {
     
@@ -53,6 +52,9 @@
                                    target:self
                                    action:@selector(scanBarAction:)];
     self.navigationItem.rightBarButtonItem = rightButton;
+    if (IOS_7LAST) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -71,18 +73,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationController.navigationBarHidden = NO;
-    
-    if (IOS_7LAST) {
-        self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    }
-    
-//    CALayer *imageLayer = [CALayer layer];
-//    imageLayer.frame = self.view.frame;
-//    imageLayer.cornerRadius = 10;
-//    imageLayer.contents = (id)[UIImage imageNamed:@"mainViewBackground"].CGImage;
-// 
-//    [self.view.layer addSublayer:imageLayer];
 }
 
 #pragma mark - UIGestureRecognizerDelegate

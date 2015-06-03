@@ -33,7 +33,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.1
     self.navigationItem.title = _fatherChannel.name;
-//    [UITools navigationBackButtonTitle:@"" action:@selector(backAction:) target:self];
     _photos = [NSMutableArray array];
     _thumbs = [NSMutableArray array];
     
@@ -65,10 +64,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)backAction:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 #pragma mark - UItableDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -86,6 +81,11 @@
     } else {
         return 50;
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView * view = [[UIView alloc] init];
+    return view;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -135,6 +135,8 @@
         if (currentNod.isImg) {
             cell.imageView.backgroundColor = [UIColor yellowColor];
         }
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor clearColor];
     }
     return cell;
 }

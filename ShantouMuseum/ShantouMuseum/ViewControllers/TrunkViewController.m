@@ -50,6 +50,11 @@
     return 50;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView * view = [[UIView alloc] init];
+    return view;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *cellIdentifier = @"onlyLabelsCell";
@@ -60,6 +65,8 @@
     }
     ChannelTree *treeNode = _arrayChannels[indexPath.row];
     cell.textLabel.text = treeNode.name;
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 

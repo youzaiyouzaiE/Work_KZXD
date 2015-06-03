@@ -7,7 +7,7 @@
 //
 
 #import "ScanWebView.h"
-@interface ScanWebView ()<UIWebViewDelegate> {
+@interface ScanWebView ()<UIWebViewDelegate,UIGestureRecognizerDelegate> {
     
 }
 
@@ -28,16 +28,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
+    self.navigationItem.leftBarButtonItem=newBackButton;
+    
     UIWebView *webView = [[UIWebView alloc] init];
     webView.frame = self.view.frame;
     webView.delegate = self;
     [self.view addSubview:webView];
     
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
+    webView.scalesPageToFit = YES;
+    
+    if (IOS_7LAST) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    }
 }
 
 - (void)backAction:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    return YES;
 }
 
 #pragma mark - webViewDelegate
