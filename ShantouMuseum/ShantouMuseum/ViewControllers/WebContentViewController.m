@@ -47,22 +47,23 @@
     NSString *documentPath = [[UITools getInstancet] pathForDocumentName:WebImageDocmentName];
 //    NSArray *arrayImages = [UITools getFilesInDocumentPath:documentPath];
     for (NSString *imgUrl in arrayImgUrlStr) {
-        NSString *imagPath = [documentPath stringByAppendingPathComponent:imgUrl];
+        NSString *imageName = [UITools getImageNameForContentImg:imgUrl];
+        NSString *imagPath = [documentPath stringByAppendingPathComponent:imageName];
         NSString *urlStr = IMAGE_ROAD_URL_STR(imgUrl);
         if ([[NSFileManager defaultManager] fileExistsAtPath:imagPath]) {
-            [htmlString stringByReplacingOccurrencesOfString:imgUrl withString:imagPath];
+            NSString *pathSrt = [NSString stringWithFormat:@"file://%@",imagPath];
+            htmlString = [htmlString stringByReplacingOccurrencesOfString:imgUrl withString:pathSrt];
         } else {
-            [htmlString stringByReplacingOccurrencesOfString:imgUrl withString:urlStr];
+            htmlString = [htmlString stringByReplacingOccurrencesOfString:imgUrl withString:urlStr];
             [SDWebImageDownloader.sharedDownloader downloadImageWithURL:[NSURL URLWithString:urlStr]
                                                                 options:0
                                                                progress:^(NSInteger receivedSize, NSInteger expectedSize)
              {
+                 
              }
-                                                              completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished)
-             {
-                 if (image && finished)
-                 {
-                     if ([[UITools getInstancet] saveImageToFileParth:documentPath image:image inFileName:imgUrl]) {
+                                                              completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                 if (image && finished) {
+                     if ([[UITools getInstancet] saveImageToFileParth:WebImageDocmentName image:image inFileName:imageName]) {
                           NSLog(@"save success");
                      }
                  }
@@ -73,8 +74,6 @@
     self.webView.scalesPageToFit = YES;
     // Do any additional setup after loading the view.
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -98,7 +97,8 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    
+    NSString *img = [webView stringByEvaluatingJavaScriptFromString:@"document.img"];
+     NSLog(@"%@",img);
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
