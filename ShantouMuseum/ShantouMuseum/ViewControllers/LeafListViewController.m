@@ -29,10 +29,15 @@
 
 @implementation LeafListViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.1
     self.navigationItem.title = _fatherChannel.name;
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"home"] style:UIBarButtonItemStylePlain target:self action:@selector(homeAction:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
+    
     _photos = [NSMutableArray array];
     _thumbs = [NSMutableArray array];
     
@@ -57,6 +62,10 @@
             [_thumbs addObject:photo];
         }
     }
+}
+
+- (void)homeAction:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -150,7 +159,8 @@
         savePath = [savePath stringByAppendingPathComponent:selectNod.title];
     }
         if (selectNod.isImg && selectNod.images !=nil) {////显示子节点里的图片
-        [_photos removeAllObjects];
+            [_photos removeAllObjects];
+            [_thumbs removeAllObjects];
         for (Image *image in selectNod.images) {
             MWPhoto *photo;
             NSString *documentPath = [[UITools getInstancet] pathForDocumentName:savePath];

@@ -36,6 +36,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"二维码";
+    
     _label = [[UILabel alloc] init];
     _label.frame = CGRectMake(0, self.view.bounds.size.height - 40, self.view.bounds.size.width, 40);
     _label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
@@ -131,6 +132,10 @@
             _label.text = detectionString;
             ScanWebView *webVC = [[ScanWebView alloc] init];
             webVC.urlString = detectionString;
+            
+//            self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+//            self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+            
             [self.navigationController pushViewController:webVC animated:YES];
             [_session stopRunning];
             isStopMove = YES;

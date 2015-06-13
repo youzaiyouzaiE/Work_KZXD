@@ -28,9 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
-    self.navigationItem.leftBarButtonItem=newBackButton;
-    
+//    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
+//    self.navigationItem.leftBarButtonItem = newBackButton;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backImage"] style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
     UIWebView *webView = [[UIWebView alloc] init];
     webView.frame = self.view.frame;
     webView.delegate = self;

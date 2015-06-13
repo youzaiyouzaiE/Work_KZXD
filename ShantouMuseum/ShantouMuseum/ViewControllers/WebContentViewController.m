@@ -69,7 +69,9 @@
                  }
              }];
         }
-    }    
+    }
+    [self.webView setBackgroundColor:[UIColor colorWithRed:70.0f/255.0f green:50.0f/255.0f blue:42.0f/255.0f alpha:0.5]];
+    [self.webView setOpaque:NO];
     [self.webView loadHTMLString:htmlString baseURL:nil];
     self.webView.scalesPageToFit = YES;
     // Do any additional setup after loading the view.

@@ -52,6 +52,11 @@
                                    target:self
                                    action:@selector(scanBarAction:)];
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"更新" style:UIBarButtonItemStylePlain target:self action:@selector(refreshTree:)];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    
     if (IOS_7LAST) {
         self.navigationController.interactivePopGestureRecognizer.delegate = self;
     }
@@ -82,6 +87,11 @@
     }  else {
         return YES;
     }
+}
+
+#pragma mark -actionPerform
+- (void)refreshTree:(id)sender {
+    [self loadDate];
 }
 
 - (void)scanBarAction:(id)sender
@@ -116,16 +126,7 @@
                                self.fristChannelTree.parent = nil;
                                [self childrenContentsWithArray:arry andChannelParent:_fristChannelTree];
                                _arrayCurrenTree = self.fristChannelTree.children;
-//                                NSLog(@"Current tree :%@",arrayCurrenTree);
-//                               for (id node in arrayCurrenTree) {
-//                                   if ([node isKindOfClass:[ChannelTree class]]) {
-//                                        NSLog(@"node is channelTree");
-//                                       ChannelTree *tree = (ChannelTree *)node;
-//                                        NSLog(@"name is :%@",tree.name);
-//                                   } else
-//                                        NSLog(@"what is node ??");
-//                                   
-//                               }
+                               [[NSUserDefaults standardUserDefaults] rm_setCustomObject:_fristChannelTree forKey:@"RootChannel"];
                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                    [self.controllerView reloadData];
                                });
@@ -170,7 +171,6 @@
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 //     NSLog(@"数组里内容是：%@",_arrayCurrenTree);

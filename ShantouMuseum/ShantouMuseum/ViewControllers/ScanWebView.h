@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ScanWebView : UIViewController
-
 @property (nonatomic, copy) NSString *urlString;
+
+- (void)backAction:(id)sender ;
 @end
