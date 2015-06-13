@@ -53,7 +53,7 @@
                                    action:@selector(scanBarAction:)];
     self.navigationItem.rightBarButtonItem = rightButton;
     
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"更新" style:UIBarButtonItemStylePlain target:self action:@selector(refreshTree:)];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"更新" style:UIBarButtonItemStylePlain target:self action:@selector(updateTree:)];
     self.navigationItem.leftBarButtonItem = leftItem;
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     
@@ -90,7 +90,7 @@
 }
 
 #pragma mark -actionPerform
-- (void)refreshTree:(id)sender {
+- (void)updateTree:(id)sender {
     [self loadDate];
 }
 
