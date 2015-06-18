@@ -32,10 +32,8 @@
 		DA855F041AF903F3005CF033 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA855F031AF903F3005CF033 /* MainViewController.m */; };
 		DA8560591AF9072F005CF033 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8560581AF9072F005CF033 /* libz.dylib */; };
 		DA8560671AF90760005CF033 /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = DA85605C1AF90760005CF033 /* AppData.m */; };
-		DA8560681AF90760005CF033 /* DataTools.m in Sources */ = {isa = PBXBuildFile; fileRef = DA85605F1AF90760005CF033 /* DataTools.m */; };
 		DA8560691AF90760005CF033 /* GlobalInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8560621AF90760005CF033 /* GlobalInstance.m */; };
 		DA85606A1AF90760005CF033 /* RequestWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8560641AF90760005CF033 /* RequestWrapper.m */; };
-		DA85606B1AF90760005CF033 /* UITools.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8560661AF90760005CF033 /* UITools.m */; };
 		DA95986E1AFF8B4200D49D42 /* CollectionTripletLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DA95986D1AFF8B4200D49D42 /* CollectionTripletLayout.m */; };
 		DA9598711AFF939E00D49D42 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9598701AFF939E00D49D42 /* Image.m */; };
 		DA9598741AFF94E500D49D42 /* ContentNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9598731AFF94E500D49D42 /* ContentNode.m */; };
@@ -51,6 +49,8 @@
 		DACF16751B074749005445C4 /* NSObject+RMCopyable.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF166F1B074749005445C4 /* NSObject+RMCopyable.m */; };
 		DACF16761B074749005445C4 /* NSUserDefaults+RMSaveCustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF16711B074749005445C4 /* NSUserDefaults+RMSaveCustomObject.m */; };
 		DACF16771B074749005445C4 /* RMMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = DACF16731B074749005445C4 /* RMMapper.m */; };
+		DAD3099A1B32F93700409C5C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD309991B32F93700409C5C /* Reachability.m */; };
+		DAD3099F1B330C6F00409C5C /* UITools.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD3099E1B330C6F00409C5C /* UITools.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,15 +115,12 @@
 		DA8560581AF9072F005CF033 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		DA85605B1AF90760005CF033 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
 		DA85605C1AF90760005CF033 /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
-		DA85605E1AF90760005CF033 /* DataTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTools.h; sourceTree = "<group>"; };
-		DA85605F1AF90760005CF033 /* DataTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataTools.m; sourceTree = "<group>"; };
 		DA8560601AF90760005CF033 /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		DA8560611AF90760005CF033 /* GlobalInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalInstance.h; sourceTree = "<group>"; };
 		DA8560621AF90760005CF033 /* GlobalInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalInstance.m; sourceTree = "<group>"; };
 		DA8560631AF90760005CF033 /* RequestWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestWrapper.h; sourceTree = "<group>"; };
 		DA8560641AF90760005CF033 /* RequestWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestWrapper.m; sourceTree = "<group>"; };
 		DA8560651AF90760005CF033 /* UITools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITools.h; sourceTree = "<group>"; };
-		DA8560661AF90760005CF033 /* UITools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITools.m; sourceTree = "<group>"; };
 		DA95986C1AFF8B4200D49D42 /* CollectionTripletLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionTripletLayout.h; sourceTree = "<group>"; };
 		DA95986D1AFF8B4200D49D42 /* CollectionTripletLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionTripletLayout.m; sourceTree = "<group>"; };
 		DA95986F1AFF939E00D49D42 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
@@ -153,6 +150,9 @@
 		DACF16711B074749005445C4 /* NSUserDefaults+RMSaveCustomObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+RMSaveCustomObject.m"; sourceTree = "<group>"; };
 		DACF16721B074749005445C4 /* RMMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMapper.h; sourceTree = "<group>"; };
 		DACF16731B074749005445C4 /* RMMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMapper.m; sourceTree = "<group>"; };
+		DAD309981B32F93700409C5C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		DAD309991B32F93700409C5C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		DAD3099E1B330C6F00409C5C /* UITools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITools.m; sourceTree = "<group>"; };
 		E3547644B5CC57DAC93F853C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -375,7 +375,7 @@
 				DA8560631AF90760005CF033 /* RequestWrapper.h */,
 				DA8560641AF90760005CF033 /* RequestWrapper.m */,
 				DA8560651AF90760005CF033 /* UITools.h */,
-				DA8560661AF90760005CF033 /* UITools.m */,
+				DAD3099E1B330C6F00409C5C /* UITools.m */,
 			);
 			name = GlobalFile;
 			path = ShantouMuseum/GlobalFile;
@@ -384,8 +384,8 @@
 		DA85605D1AF90760005CF033 /* DataTools */ = {
 			isa = PBXGroup;
 			children = (
-				DA85605E1AF90760005CF033 /* DataTools.h */,
-				DA85605F1AF90760005CF033 /* DataTools.m */,
+				DAD309981B32F93700409C5C /* Reachability.h */,
+				DAD309991B32F93700409C5C /* Reachability.m */,
 			);
 			path = DataTools;
 			sourceTree = "<group>";
@@ -562,6 +562,7 @@
 				DACF16741B074749005445C4 /* NSObject+RMArchivable.m in Sources */,
 				DACF16771B074749005445C4 /* RMMapper.m in Sources */,
 				DACF16761B074749005445C4 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
+				DAD3099F1B330C6F00409C5C /* UITools.m in Sources */,
 				DABD0AD01B1B0726008D9015 /* ScanBarViewController.m in Sources */,
 				DA7867471B10C286005414A7 /* MWTapDetectingView.m in Sources */,
 				DA855EE01AF8FFB5005CF033 /* AppDelegate.m in Sources */,
@@ -572,11 +573,9 @@
 				DA855F041AF903F3005CF033 /* MainViewController.m in Sources */,
 				DACF15731B04DA07005445C4 /* ImageListViewController.m in Sources */,
 				DA9598B41B02418900D49D42 /* ChildTrunkViewController.m in Sources */,
-				DA8560681AF90760005CF033 /* DataTools.m in Sources */,
 				DABD0AD71B1B25C6008D9015 /* ScanWebView.m in Sources */,
 				DA85606A1AF90760005CF033 /* RequestWrapper.m in Sources */,
 				DA9598711AFF939E00D49D42 /* Image.m in Sources */,
-				DA85606B1AF90760005CF033 /* UITools.m in Sources */,
 				DA7867411B10C286005414A7 /* MWCaptionView.m in Sources */,
 				DA9598741AFF94E500D49D42 /* ContentNode.m in Sources */,
 				DA7867431B10C286005414A7 /* MWGridViewController.m in Sources */,
@@ -585,6 +584,7 @@
 				DA9598AE1B02273E00D49D42 /* LeafListViewController.m in Sources */,
 				DA855EDD1AF8FFB5005CF033 /* main.m in Sources */,
 				DA82AFDF1AFE22980088BF7A /* ChannelTree.m in Sources */,
+				DAD3099A1B32F93700409C5C /* Reachability.m in Sources */,
 				DA8560691AF90760005CF033 /* GlobalInstance.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -721,10 +721,7 @@
 				);
 				INFOPLIST_FILE = ShantouMuseum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/ShantouMuseum/FrameWorks/3rd/ZBarSDK",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -743,10 +740,7 @@
 				);
 				INFOPLIST_FILE = ShantouMuseum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/ShantouMuseum/FrameWorks/3rd/ZBarSDK",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

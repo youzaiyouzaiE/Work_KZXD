@@ -1396,9 +1396,17 @@
 	}
 }
 
-- (BOOL)areControlsHidden { return (_toolbar.alpha == 0); }
-- (void)hideControls { [self setControlsHidden:YES animated:YES permanent:NO]; }
-- (void)toggleControls { [self setControlsHidden:![self areControlsHidden] animated:YES permanent:NO]; }
+- (BOOL)areControlsHidden {
+    return (_toolbar.alpha == 0);
+}
+
+- (void)hideControls {
+    [self setControlsHidden:YES animated:YES permanent:NO];
+}
+
+- (void)toggleControls {
+    [self setControlsHidden:![self areControlsHidden] animated:YES permanent:NO];
+}
 
 #pragma mark - Properties
 

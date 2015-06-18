@@ -23,6 +23,7 @@
 + (void)navigationBackButtonTitle:(NSString *)backButtonTitle action:(SEL)action target:(UIViewController *)viewController;
 
 #pragma UIDate
+- (BOOL)hasTheFileInDirectory:(NSString *)documentName ;
 - (NSString *)pathForDocumentName:(NSString *)documentName;
 - (BOOL)saveImageToFileParth:parth image:(UIImage *)image inFileName:(NSString *)fileName;
 //+ (NSArray *)getFilesInDocumentPath:(NSString *)path;

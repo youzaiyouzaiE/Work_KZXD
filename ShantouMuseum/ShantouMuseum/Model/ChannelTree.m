@@ -26,6 +26,8 @@
         NSNumber *imgNum = [dic objectForKey:@"hasImg"];
         self.hasImg = imgNum.boolValue;
         self.text = [dic objectForKey:@"text"];
+        
+//        [self setValuesForKeysWithDictionary:dic];
     }
     return self;
 }
@@ -41,5 +43,10 @@
 -(NSInteger)getNumberLound {
     return self.parent == nil?0:[self.parent getNumberLound] + 1;
 }
+
+//- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+//    
+//    [super setValue:value forUndefinedKey:key];
+//}
 
 @end

@@ -16,12 +16,15 @@
 #import "TrunkViewController.h"
 #import "LeafListViewController.h"
 #import "ScanBarViewController.h"
+#import "Reachability.h"
+#import "WebContentViewController.h"
 
 
 @interface MainViewController () <CollectionViewDelegateTripletLayout,UICollectionViewDataSource,UICollectionViewDelegate,UIWebViewDelegate,wecomViewControllDelegate,UIGestureRecognizerDelegate> {
     
     ChannelTree *selectChannel;
     NSArray *arrayLeafs;
+    Reachability *internetReachableFoo;
 }
 
 @property (weak, nonatomic) IBOutlet UICollectionView *controllerView;
@@ -35,9 +38,42 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//     NSLog(@"%@",self.fristChannelTree.name);
-//    [UITools setNavigationLeftButtonTitle:nil leftAction:nil rightBtnStr:@"扫描" rightAction:@selector(scanBarAction:) rightBtnSelected:nil navigationTitleStr:@"汕头海关网上关史陈列馆" forViewController:self];
-    self.navigationController.navigationBarHidden = NO;
+     self.navigationController.navigationBarHidden = NO;
+//    if ([internetReachableFoo isReachable]) {
+//        NSLog(@"have internet");
+//    } else {
+//        NSLog(@"no internet");
+//    }
+//    
+//    if (internetReachableFoo.isReachableViaWiFi) {
+//         NSLog(@"is WIFI");
+//    }
+//    if (internetReachableFoo.isReachableViaWWAN) {
+//         NSLog(@"is wwan ");
+//    }
+//    
+    if (self.arrayCurrenTree == nil && ![internetReachableFoo isReachable]) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"请确认设备已联接到网络后，点击 '更新' 键重试" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+        [alert show];
+    }
+//    if (![[UITools getInstancet] hasTheFileInDirectory:WebImageDocmentName] && internetReachableFoo.isReachableViaWWAN) {
+//        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"移动网络下浏览会耗费大量流量，建议切换至wifi环境" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+//        [alert show];
+//    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+}
+
+- (void)loadView {
+    [super loadView];
+
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
@@ -47,10 +83,10 @@
     self.navigationItem.title = @"汕头海关网上关史陈列馆";
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]
-                                   initWithTitle: @"扫描"
-                                   style:UIBarButtonItemStylePlain
-                                   target:self
-                                   action:@selector(scanBarAction:)];
+                                    initWithTitle: @"扫描"
+                                    style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(scanBarAction:)];
     self.navigationItem.rightBarButtonItem = rightButton;
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"更新" style:UIBarButtonItemStylePlain target:self action:@selector(updateTree:)];
@@ -60,14 +96,9 @@
     if (IOS_7LAST) {
         self.navigationController.interactivePopGestureRecognizer.delegate = self;
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)loadView {
-    [super loadView];
+    
+    [self testInternetConnection];
+    
     if (self.arrayCurrenTree == nil) {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         WelcomeViewController *welcomeVC = (WelcomeViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
@@ -76,8 +107,9 @@
     }
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -91,7 +123,12 @@
 
 #pragma mark -actionPerform
 - (void)updateTree:(id)sender {
-    [self loadDate];
+    if (internetReachableFoo.isReachable) {
+        [self loadDate];
+    } else {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请确定已联接到网后再试" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+        [alert show];
+    }
 }
 
 - (void)scanBarAction:(id)sender
@@ -100,14 +137,31 @@
     [self.navigationController pushViewController:scanBarVC animated:YES];
 }
 
+#pragma mark - netWork
+- (void)testInternetConnection
+{
+    internetReachableFoo = [Reachability reachabilityWithHostname:@"www.baidu.com"];
+    
+    // Internet is reachable
+    internetReachableFoo.reachableBlock = ^(Reachability*reach) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Yayyy, we have the interwebs!");
+        });
+    };
+    // Internet is not reachable
+    internetReachableFoo.unreachableBlock = ^(Reachability*reach)
+    {
+        // Update the UI on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Someone broke the internet :(");
+        });
+    };
+    [internetReachableFoo startNotifier];
+}
+
 - (void)getDataFormServer:(NSMutableArray *)nodeArray andFristNode:(ChannelTree *)fristNode{
     self.arrayCurrenTree = nodeArray;
     self.fristChannelTree = fristNode;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)loadDate
@@ -130,10 +184,12 @@
                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                    [self.controllerView reloadData];
                                });
-                               
                            }
                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                             NSLog(@"fault");
+                            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:NO];
+                               hud.mode = MBProgressHUDModeText;
+                               hud.labelText = @"请求出错";
+                               [hud hide:YES afterDelay:1.5f];
                            }];
 }
 
@@ -233,7 +289,11 @@
                                 [self performSegueWithIdentifier:@"MainPushToLeafVC" sender:self];
                               }
                               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                  NSLog(@"获取数据 fault");
+                                  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:NO];
+                                  hud.mode = MBProgressHUDModeText;
+                                  hud.labelText = @"请求出错";
+                                  [hud hide:YES afterDelay:1.5f];
+//                                  NSLog(@"获取数据 fault");
                               }];
 }
 

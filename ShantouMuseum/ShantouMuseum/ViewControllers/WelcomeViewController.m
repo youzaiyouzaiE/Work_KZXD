@@ -27,6 +27,7 @@
     fristChannel = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"RootChannel"];
     if (fristChannel == nil) {
         [self loadDate];
+//        [self.navigationController popViewControllerAnimated:NO];
     } else {
         [self.delegate getDataFormServer:fristChannel.children andFristNode:fristChannel];
         [self.navigationController popViewControllerAnimated:NO];
@@ -65,6 +66,7 @@
                                   });
                               }
                               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                  [self.navigationController popViewControllerAnimated:NO];
                                   NSLog(@"fault");
                               }];
 }

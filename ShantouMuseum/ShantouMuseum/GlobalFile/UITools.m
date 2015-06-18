@@ -47,10 +47,20 @@ SHARE_INSTANCET(UITools)
 }
 
 #pragma mark - documentFile option
+- (BOOL)hasTheFileInDirectory:(NSString *)documentName {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES);
+    NSString *imageDir = [paths[0] stringByAppendingPathComponent:FORMAT(@"%@",documentName)];
+    if ([fm fileExistsAtPath:imageDir]) {
+        return YES;
+    } else
+        return NO;
+}
+
 - (NSString *)pathForDocumentName:(NSString *)documentName////获取 doment下文件路径
 {
     NSFileManager *fm = [NSFileManager defaultManager];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES);
     NSString *imageDir = [paths[0] stringByAppendingPathComponent:FORMAT(@"%@",documentName)];
     if ([fm fileExistsAtPath:imageDir]) {
 //        NSLog(@"文件夾已经存在");
@@ -70,7 +80,7 @@ SHARE_INSTANCET(UITools)
 
 + (NSArray *)getFilesInDocumentPath:(NSString *)path
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES);
     NSString *pathName = [paths[0] stringByAppendingPathComponent:path];
     if ([[NSFileManager defaultManager] fileExistsAtPath:pathName]) {
         NSArray *sourceArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:pathName error:nil];
