@@ -186,10 +186,10 @@
                                });
                            }
                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:NO];
-                               hud.mode = MBProgressHUDModeText;
-                               hud.labelText = @"请求出错";
-                               [hud hide:YES afterDelay:1.5f];
+//                            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:NO];
+//                               hud.mode = MBProgressHUDModeText;
+//                               hud.labelText = @"请求出错";
+//                               [hud hide:YES afterDelay:1.5f];
                            }];
 }
 
@@ -289,10 +289,10 @@
                                 [self performSegueWithIdentifier:@"MainPushToLeafVC" sender:self];
                               }
                               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:NO];
-                                  hud.mode = MBProgressHUDModeText;
-                                  hud.labelText = @"请求出错";
-                                  [hud hide:YES afterDelay:1.5f];
+//                                  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:NO];
+//                                  hud.mode = MBProgressHUDModeText;
+//                                  hud.labelText = @"请求出错";
+//                                  [hud hide:YES afterDelay:1.5f];
 //                                  NSLog(@"获取数据 fault");
                               }];
 }
