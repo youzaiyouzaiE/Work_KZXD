@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		93FBEC0F9FB5C1F6A170CD27 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3547644B5CC57DAC93F853C /* libPods.a */; };
+		DA5AE3E41BFF634E008E598E /* JHCollectionViewReorderableTripletLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5AE3E11BFF634E008E598E /* JHCollectionViewReorderableTripletLayout.m */; };
+		DA5AE3E51BFF634E008E598E /* JHCollectionViewTripletLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5AE3E31BFF634E008E598E /* JHCollectionViewTripletLayout.m */; };
 		DA7867271B0B845B005414A7 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7867221B0B845B005414A7 /* TFHpple.m */; };
 		DA7867281B0B845B005414A7 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7867241B0B845B005414A7 /* TFHppleElement.m */; };
 		DA7867291B0B845B005414A7 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7867261B0B845B005414A7 /* XPathQuery.m */; };
@@ -26,7 +28,7 @@
 		DA855EDD1AF8FFB5005CF033 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA855EDC1AF8FFB5005CF033 /* main.m */; };
 		DA855EE01AF8FFB5005CF033 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA855EDF1AF8FFB5005CF033 /* AppDelegate.m */; };
 		DA855EE61AF8FFB5005CF033 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA855EE41AF8FFB5005CF033 /* Main.storyboard */; };
-		DA855EE81AF8FFB5005CF033 /* l.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA855EE71AF8FFB5005CF033 /* l.xcassets */; };
+		DA855EE81AF8FFB5005CF033 /* lmage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA855EE71AF8FFB5005CF033 /* lmage.xcassets */; };
 		DA855EEB1AF8FFB5005CF033 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA855EE91AF8FFB5005CF033 /* LaunchScreen.xib */; };
 		DA855EF71AF8FFB5005CF033 /* ShantouMuseumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA855EF61AF8FFB5005CF033 /* ShantouMuseumTests.m */; };
 		DA855F041AF903F3005CF033 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA855F031AF903F3005CF033 /* MainViewController.m */; };
@@ -66,6 +68,10 @@
 /* Begin PBXFileReference section */
 		C4C4D9534141C71090DFC185 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D69EFA28B2C8E4E57836D7D3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		DA5AE3E01BFF634E008E598E /* JHCollectionViewReorderableTripletLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHCollectionViewReorderableTripletLayout.h; sourceTree = "<group>"; };
+		DA5AE3E11BFF634E008E598E /* JHCollectionViewReorderableTripletLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHCollectionViewReorderableTripletLayout.m; sourceTree = "<group>"; };
+		DA5AE3E21BFF634E008E598E /* JHCollectionViewTripletLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHCollectionViewTripletLayout.h; sourceTree = "<group>"; };
+		DA5AE3E31BFF634E008E598E /* JHCollectionViewTripletLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHCollectionViewTripletLayout.m; sourceTree = "<group>"; };
 		DA78671E1B0B8224005414A7 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		DA7867211B0B845B005414A7 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
 		DA7867221B0B845B005414A7 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
@@ -103,7 +109,7 @@
 		DA855EDE1AF8FFB5005CF033 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DA855EDF1AF8FFB5005CF033 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		DA855EE51AF8FFB5005CF033 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DA855EE71AF8FFB5005CF033 /* l.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = l.xcassets; sourceTree = "<group>"; };
+		DA855EE71AF8FFB5005CF033 /* lmage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = lmage.xcassets; sourceTree = "<group>"; };
 		DA855EEA1AF8FFB5005CF033 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		DA855EF01AF8FFB5005CF033 /* ShantouMuseumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShantouMuseumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA855EF51AF8FFB5005CF033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -291,7 +297,7 @@
 				DA95986B1AFF8B4200D49D42 /* CustomUIS */,
 				DA82AFDC1AFE223A0088BF7A /* Model */,
 				DA85605A1AF90760005CF033 /* GlobalFile */,
-				DA855EE71AF8FFB5005CF033 /* l.xcassets */,
+				DA855EE71AF8FFB5005CF033 /* lmage.xcassets */,
 				DA855EE91AF8FFB5005CF033 /* LaunchScreen.xib */,
 				DA855EDA1AF8FFB5005CF033 /* Supporting Files */,
 			);
@@ -393,6 +399,10 @@
 		DA95986B1AFF8B4200D49D42 /* CustomUIS */ = {
 			isa = PBXGroup;
 			children = (
+				DA5AE3E01BFF634E008E598E /* JHCollectionViewReorderableTripletLayout.h */,
+				DA5AE3E11BFF634E008E598E /* JHCollectionViewReorderableTripletLayout.m */,
+				DA5AE3E21BFF634E008E598E /* JHCollectionViewTripletLayout.h */,
+				DA5AE3E31BFF634E008E598E /* JHCollectionViewTripletLayout.m */,
 				DA95986C1AFF8B4200D49D42 /* CollectionTripletLayout.h */,
 				DA95986D1AFF8B4200D49D42 /* CollectionTripletLayout.m */,
 			);
@@ -466,6 +476,7 @@
 				TargetAttributes = {
 					DA855ED61AF8FFB5005CF033 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = LZ4SUTPVG9;
 					};
 					DA855EEF1AF8FFB5005CF033 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -499,7 +510,7 @@
 			files = (
 				DA855EE61AF8FFB5005CF033 /* Main.storyboard in Resources */,
 				DA855EEB1AF8FFB5005CF033 /* LaunchScreen.xib in Resources */,
-				DA855EE81AF8FFB5005CF033 /* l.xcassets in Resources */,
+				DA855EE81AF8FFB5005CF033 /* lmage.xcassets in Resources */,
 				DA7867491B10C286005414A7 /* MWPhotoBrowser.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -573,6 +584,7 @@
 				DA855F041AF903F3005CF033 /* MainViewController.m in Sources */,
 				DACF15731B04DA07005445C4 /* ImageListViewController.m in Sources */,
 				DA9598B41B02418900D49D42 /* ChildTrunkViewController.m in Sources */,
+				DA5AE3E51BFF634E008E598E /* JHCollectionViewTripletLayout.m in Sources */,
 				DABD0AD71B1B25C6008D9015 /* ScanWebView.m in Sources */,
 				DA85606A1AF90760005CF033 /* RequestWrapper.m in Sources */,
 				DA9598711AFF939E00D49D42 /* Image.m in Sources */,
@@ -586,6 +598,7 @@
 				DA82AFDF1AFE22980088BF7A /* ChannelTree.m in Sources */,
 				DAD3099A1B32F93700409C5C /* Reachability.m in Sources */,
 				DA8560691AF90760005CF033 /* GlobalInstance.m in Sources */,
+				DA5AE3E41BFF634E008E598E /* JHCollectionViewReorderableTripletLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,7 +657,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -663,10 +677,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = "iphoneos 7.1";
 			};
 			name = Debug;
 		};
@@ -687,6 +702,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -700,9 +716,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = "iphoneos 7.1";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -712,17 +729,24 @@
 			baseConfigurationReference = D69EFA28B2C8E4E57836D7D3 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ShantouMuseum/ShantouMuseum.pch";
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = ShantouMuseum/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = "iphoneos 7.1";
 			};
 			name = Debug;
 		};
@@ -731,17 +755,24 @@
 			baseConfigurationReference = C4C4D9534141C71090DFC185 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ShantouMuseum/ShantouMuseum.pch";
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = ShantouMuseum/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = "iphoneos 7.1";
 			};
 			name = Release;
 		};

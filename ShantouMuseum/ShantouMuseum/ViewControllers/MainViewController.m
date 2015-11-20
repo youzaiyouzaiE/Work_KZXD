@@ -7,10 +7,9 @@
 //
 
 #import "MainViewController.h"
-#import "CollectionTripletLayout.h"
+//#import "CollectionTripletLayout.h"
 #import "ChannelTree.h"
 #import "JSONKit.h"
-#import "WelcomeViewController.h"
 #import "Image.h"
 #import "ContentNode.h"
 #import "TrunkViewController.h"
@@ -18,9 +17,9 @@
 #import "ScanBarViewController.h"
 #import "Reachability.h"
 #import "WebContentViewController.h"
+#import "JHCollectionViewReorderableTripletLayout.h"
 
-
-@interface MainViewController () <CollectionViewDelegateTripletLayout,UICollectionViewDataSource,UICollectionViewDelegate,UIWebViewDelegate,wecomViewControllDelegate,UIGestureRecognizerDelegate> {
+@interface MainViewController () <JHCollectionViewDelegateReorderableTripletLayout, JHCollectionViewReorderableTripletLayoutDataSource,UICollectionViewDataSource,UICollectionViewDelegate,UIWebViewDelegate,UIGestureRecognizerDelegate> {
     
     ChannelTree *selectChannel;
     NSArray *arrayLeafs;
@@ -44,14 +43,16 @@
 //    } else {
 //        NSLog(@"no internet");
 //    }
-//    
 //    if (internetReachableFoo.isReachableViaWiFi) {
 //         NSLog(@"is WIFI");
 //    }
 //    if (internetReachableFoo.isReachableViaWWAN) {
 //         NSLog(@"is wwan ");
 //    }
-//    
+    
+    
+//    self.arrayCurrenTree = [NSMutableArray arrayWithArray:@[@"陈列馆概况",@"钟楼新貌",@"陈列馆展厅",@"领导墨宝",@"藏品大观",@"光影留真",@"嘉宾云集",@"关史研究",@"参观指引",@"",@""]];
+    
     if (self.arrayCurrenTree == nil && ![internetReachableFoo isReachable]) {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"请确认设备已联接到网络后，点击 '更新' 键重试" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
         [alert show];
@@ -96,14 +97,15 @@
     if (IOS_7LAST) {
         self.navigationController.interactivePopGestureRecognizer.delegate = self;
     }
-    
     [self testInternetConnection];
     
-    if (self.arrayCurrenTree == nil) {
-        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        WelcomeViewController *welcomeVC = (WelcomeViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
-        welcomeVC.delegate = self;
-        [self.navigationController pushViewController:welcomeVC animated:NO];
+    
+    ChannelTree *fristChannel = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"RootChannel"];
+    if (!fristChannel) {
+        [self loadDate];
+    } else {
+        self.arrayCurrenTree = fristChannel.children;
+        self.fristChannelTree = fristChannel;
     }
 }
 
@@ -123,7 +125,7 @@
 
 #pragma mark -actionPerform
 - (void)updateTree:(id)sender {
-    if (internetReachableFoo.isReachable) {
+    if (internetReachableFoo.isReachable) {////有网络
         [self loadDate];
     } else {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请确定已联接到网后再试" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
@@ -141,8 +143,6 @@
 - (void)testInternetConnection
 {
     internetReachableFoo = [Reachability reachabilityWithHostname:@"www.baidu.com"];
-    
-    // Internet is reachable
     internetReachableFoo.reachableBlock = ^(Reachability*reach) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"Yayyy, we have the interwebs!");
@@ -159,13 +159,7 @@
     [internetReachableFoo startNotifier];
 }
 
-- (void)getDataFormServer:(NSMutableArray *)nodeArray andFristNode:(ChannelTree *)fristNode{
-    self.arrayCurrenTree = nodeArray;
-    self.fristChannelTree = fristNode;
-}
-
-- (void)loadDate
-{
+- (void)loadDate {
     [RequestWrapper getRequestWithURL:REQUEST_CHANNEL_URL_STR
                     withParameters:nil
                            success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
@@ -206,10 +200,9 @@
     }
 }
 
-
 #pragma mark -RACollectionViewDelegateTripletLayout
 - (UIEdgeInsets)insetsForCollectionView:(UICollectionView *)collectionView{
-    return UIEdgeInsetsMake(10, 20, 20, 20);
+    return UIEdgeInsetsMake(10, 16, 20, 16);
 }
 
 - (CGFloat)sectionSpacingForCollectionView:(UICollectionView *)collectionView {
@@ -222,6 +215,15 @@
     return 20;
 }
 
+#pragma mark - JHCollectionViewReorderableTripletLayoutDataSource
+
+- (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath canMoveToIndexPath:(NSIndexPath *)toIndexPath {
+    return NO;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
 
 #pragma mark - UICollectionViewDelegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -229,7 +231,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//     NSLog(@"数组里内容是：%@",_arrayCurrenTree);
+     NSLog(@"数组里内容是：%@",_arrayCurrenTree);
     return self.arrayCurrenTree.count;
 }
 
@@ -238,17 +240,15 @@
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     UILabel *titleLable = (UILabel *)[cell viewWithTag:1];
     if (SCREEN_H < 482) {///iPhone4 and 4s
-        titleLable.frame = CGRectMake(titleLable.frame.origin.x, titleLable.frame.origin.y, titleLable.frame.size.width - 5, titleLable.frame.size.height);
         titleLable.font = [UIFont systemFontOfSize:12];
     }
-   
     ChannelTree *node = self.arrayCurrenTree[indexPath.row];
     titleLable.text = node.name;
+//    titleLable.text = self.arrayCurrenTree[indexPath.row];
     return cell;
 }
 
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
@@ -267,12 +267,6 @@
 //        NSLog(@"不是叶节点，有%ld个子节点",selectChannel.children.count);
         [self performSegueWithIdentifier:@"MainPushToTrunkVC" sender:self];
     }
-    
-//    if (selectChannel.hasContent) {
-//         NSLog(@"有文章,要显示 html ? ");
-//    } else {
-//         NSLog(@"没有文章，要显示 txt, \ntext:%@",selectChannel.text);
-//    }
 }
 
 
