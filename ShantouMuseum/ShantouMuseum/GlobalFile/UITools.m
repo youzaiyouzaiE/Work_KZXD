@@ -11,6 +11,7 @@
 
 @interface UITools  (){
     UIAlertView *_autoDismissAlert;
+    UIAlertView *_msgAlert;
 }
 
 @end
@@ -34,11 +35,23 @@ SHARE_INSTANCET(UITools)
     });
 }
 
--(void)performAlretDismiss:(id)sender
-{
+- (void)performAlretDismiss:(id)sender {
     [(UIAlertView*)sender dismissWithClickedButtonIndex:0 animated:NO];
     [(UIAlertView*)sender removeFromSuperview];
 }
+
+- (void)showAlertViewTitle:(NSString *)title message:(NSString *)msg {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!_msgAlert) {
+             _msgAlert = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        }
+        _msgAlert.title = title;
+        _msgAlert.message = msg;
+        [_msgAlert show];
+    });
+   
+}
+
 
 + (UIImage *)imageWithName:(NSString *)name andType:(NSString *)type
 {
@@ -130,80 +143,36 @@ SHARE_INSTANCET(UITools)
     return pathName;
 }
 
-#pragma mark- NavigationSet
-+ (void)setNavigationTitlViewString:(NSString *)title andTitleColor:(UIColor *)color forViewController:(UIViewController *)controller
+- (void)showMessageToView:(UIView *)view message:(NSString *)message
 {
-    UILabel *titleTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 168, 44)];
-    titleTextLabel.backgroundColor = [UIColor clearColor];
-    titleTextLabel.textColor = [UIColor whiteColor];
-    titleTextLabel.font = [UIFont fontWithName:@"黑体" size:80];
-    titleTextLabel.textAlignment = NSTextAlignmentCenter;
-    titleTextLabel.text = title;
-    controller.navigationItem.titleView = titleTextLabel;
+    [self showMessageToView:view message:message autoHide:YES];
 }
 
-#define NAVIGATION_COLOR [UIColor colorWithRed:255.0f/255.0f green:173.0f/255.0f blue:104.0f/255.0f alpha:1.0]
-
-+ (void)setNavigationLeftButtonTitle:(NSString *)leftBtnStr leftAction:(SEL)action rightBtnStr:(NSString *)rightBtnStr rightAction:(SEL)rightAction rightBtnSelected:(NSString *)rightBtnStateName navigationTitleStr:(NSString *)title forViewController:(UIViewController *)controller
+- (MBProgressHUD *)showMessageToView:(UIView *)view message:(NSString *)message autoHide:(BOOL)autoHide
 {
-    if ( IOS7_OR_LATER )
-    {
-        controller.edgesForExtendedLayout = UIRectEdgeNone;
-        controller.extendedLayoutIncludesOpaqueBars = NO;
-        controller.modalPresentationCapturesStatusBarAppearance = NO;
-        [controller.navigationController.navigationBar setBarTintColor:NAVIGATION_COLOR];
-    }
-    else{
-        [[UINavigationBar appearance] setTintColor:NAVIGATION_COLOR];
-    }
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = message;
+    hud.margin = 10.f;
+    hud.removeFromSuperViewOnHide = YES;
     
-    UILabel *titleTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 168, 44)];
-    titleTextLabel.backgroundColor = [UIColor clearColor];
-//    titleTextLabel.textColor = [UIColor whiteColor];
-    titleTextLabel.font = [UIFont fontWithName:@"黑体" size:80];
-    titleTextLabel.textAlignment = NSTextAlignmentCenter;
-    titleTextLabel.text = title;
-    controller.navigationItem.titleView = titleTextLabel;
-    
-    UIView *navigationLeftItem_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 32)];
-    navigationLeftItem_view.backgroundColor = [UIColor clearColor];
-    UIButton * navigationLeftItemBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 32)];
-    [navigationLeftItemBtn setTitle:leftBtnStr forState:UIControlStateNormal];
-    if ([controller respondsToSelector:action]) {
-        [navigationLeftItemBtn addTarget:controller action:action forControlEvents:UIControlEventTouchUpInside];
+    if (autoHide) {
+        [hud hide:YES afterDelay:1.5f];
     }
-    [navigationLeftItem_view addSubview:navigationLeftItemBtn];
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:navigationLeftItem_view];
-    controller.navigationItem.leftBarButtonItem = leftBarButton;
-    
-    UIView *navigationRightItem_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 32)];
-    navigationRightItem_view.backgroundColor = [UIColor clearColor];
-    UIButton * navigationRightItemBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 32)];
-    [navigationRightItemBtn setTitle:rightBtnStr forState:UIControlStateNormal];
-    [navigationRightItemBtn setTitle:rightBtnStateName forState:UIControlStateSelected];
-    if ([controller respondsToSelector:rightAction]) {
-        [navigationRightItemBtn addTarget:controller action:rightAction forControlEvents:UIControlEventTouchUpInside];
-    }
-    [navigationRightItem_view addSubview:navigationRightItemBtn];
-    UIBarButtonItem *_rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:navigationRightItemBtn];
-    _rightBarButton.enabled = YES;
-    controller.navigationItem.rightBarButtonItem = _rightBarButton;
+    return hud;
 }
 
-+ (void)navigationBackButtonTitle:(NSString *)backButtonTitle action:(SEL)action target:(UIViewController *)viewController {
-//    UIViewController *previousViewController = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
-//    NSString *backButtonTitle = previousViewController.navigationItem.backBarButtonItem ? previousViewController.navigationItem.backBarButtonItem.title : previousViewController.title;
-    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:backButtonTitle style:UIBarButtonItemStylePlain target:viewController action:action];
-    // Appearance
-    if ([UIBarButtonItem respondsToSelector:@selector(appearance)]) {
-        [newBackButton setBackButtonBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-        [newBackButton setBackButtonBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsLandscapePhone];
-        [newBackButton setBackButtonBackgroundImage:nil forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-        [newBackButton setBackButtonBackgroundImage:nil forState:UIControlStateHighlighted barMetrics:UIBarMetricsLandscapePhone];
-        [newBackButton setTitleTextAttributes:[NSDictionary dictionary] forState:UIControlStateNormal];
-        [newBackButton setTitleTextAttributes:[NSDictionary dictionary] forState:UIControlStateHighlighted];
+- (MBProgressHUD *)showLoadingViewAddToView:(UIView *)view autoHide:(BOOL)autoHide {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+//    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.margin = 10.f;
+    hud.removeFromSuperViewOnHide = YES;
+    
+    if (autoHide) {
+        [hud hide:YES afterDelay:1.5f];
     }
-    viewController.navigationItem.backBarButtonItem = newBackButton;
+    return hud;
 }
+
 
 @end

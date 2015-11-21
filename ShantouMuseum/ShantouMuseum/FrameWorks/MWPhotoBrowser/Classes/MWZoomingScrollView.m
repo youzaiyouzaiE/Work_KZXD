@@ -21,7 +21,7 @@
 	MWTapDetectingImageView *_photoImageView;
 	DACircularProgressView *_loadingIndicator;
     UIImageView *_loadingError;
-    
+    UILabel *_loadErrorLabel;
 }
 
 @end
@@ -167,16 +167,30 @@
         [_loadingError sizeToFit];
         [self addSubview:_loadingError];
     }
+    
+    if (!_loadErrorLabel) {
+        _loadErrorLabel = [UILabel new];
+        _loadErrorLabel.text = @"加载失败，请检查网络连接";
+        _loadErrorLabel.textColor = [UIColor whiteColor];
+        _loadErrorLabel.textAlignment = NSTextAlignmentCenter;
+        _loadErrorLabel.backgroundColor = [UIColor clearColor];
+        [self addSubview:_loadErrorLabel];
+    }
     _loadingError.frame = CGRectMake(floorf((self.bounds.size.width - _loadingError.frame.size.width) / 2.),
                                      floorf((self.bounds.size.height - _loadingError.frame.size.height) / 2),
                                      _loadingError.frame.size.width,
                                      _loadingError.frame.size.height);
+    _loadErrorLabel.frame = CGRectMake(0, _loadingError.frame.origin.y + _loadingError.frame.size.height + 30,self.frame.size.width,20);
+    
 }
 
 - (void)hideImageFailure {
     if (_loadingError) {
         [_loadingError removeFromSuperview];
         _loadingError = nil;
+        
+        [_loadErrorLabel removeFromSuperview];
+        _loadErrorLabel = nil;
     }
 }
 

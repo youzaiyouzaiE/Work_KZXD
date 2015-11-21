@@ -244,9 +244,9 @@
 //    return [captionView autorelease];
 //}
 
-//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
-//    NSLog(@"ACTION!");
-//}
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
+    NSLog(@"ACTION!");
+}
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
     NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
@@ -275,6 +275,11 @@
 - (void)checkChannelContentFormServer:(NSString *)channelID
 {
     /////存到本地文件，本地没有再从服务器取出来
+    if (![AppData sharedInstance].internetReachableFoo.isReachable) {
+        [[UITools getInstancet] showAlertViewTitle:@"提示" message:@"请确定已联接到网后再试"];
+        return;
+    }
+    MBProgressHUD *hud = [[UITools getInstancet] showLoadingViewAddToView:self.view autoHide:NO];
     NSLog(@"%@",REQUEST_CONTENT_URL_STR(channelID));
     [RequestWrapper getRequestWithURL:REQUEST_CONTENT_URL_STR(channelID)
                        withParameters:nil
@@ -283,8 +288,11 @@
 //                                  arrayLeafs = [self analysisDataFormJsonString:responsString];
 //                                  [[NSUserDefaults standardUserDefaults] rm_setCustomObject:arrayLeafs forKey:LEAF_USER_DEFAULT(channelID)];
 //                                  [self performSegueWithIdentifier:@"MainPushToLeafVC" sender:self];
+                                  [hud hide:YES];
                               }
                               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                  [hud hide:YES];
+                                  [[UITools getInstancet] showMessageToView:self.view message:@"请求出错" autoHide:YES];
                                   NSLog(@"获取数据 fault");
                               }];
 }

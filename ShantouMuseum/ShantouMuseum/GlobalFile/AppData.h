@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Reachability.h"
 
 typedef NS_ENUM(NSUInteger, DeviceScreenSize) {
     isLessInch = 1,///3.5寸屏
@@ -30,13 +31,10 @@ typedef NS_ENUM(NSUInteger, SystemVersion) {
 
 
 + (instancetype)sharedInstance;
-
 - (void)getDefaultData;
-
 @property (nonatomic) DeviceScreenSize deviceSize;
 @property (nonatomic) SystemVersion systemVersion;
 
-
-
+@property (strong, nonatomic) Reachability *internetReachableFoo;
 
 @end

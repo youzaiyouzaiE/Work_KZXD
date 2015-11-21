@@ -7,7 +7,6 @@
 //
 
 #import "MainViewController.h"
-//#import "CollectionTripletLayout.h"
 #import "ChannelTree.h"
 #import "JSONKit.h"
 #import "Image.h"
@@ -15,7 +14,7 @@
 #import "TrunkViewController.h"
 #import "LeafListViewController.h"
 #import "ScanBarViewController.h"
-#import "Reachability.h"
+
 #import "WebContentViewController.h"
 #import "JHCollectionViewReorderableTripletLayout.h"
 
@@ -23,7 +22,6 @@
     
     ChannelTree *selectChannel;
     NSArray *arrayLeafs;
-    Reachability *internetReachableFoo;
 }
 
 @property (weak, nonatomic) IBOutlet UICollectionView *controllerView;
@@ -38,29 +36,20 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
      self.navigationController.navigationBarHidden = NO;
-//    if ([internetReachableFoo isReachable]) {
-//        NSLog(@"have internet");
-//    } else {
-//        NSLog(@"no internet");
-//    }
-//    if (internetReachableFoo.isReachableViaWiFi) {
-//         NSLog(@"is WIFI");
-//    }
-//    if (internetReachableFoo.isReachableViaWWAN) {
-//         NSLog(@"is wwan ");
-//    }
+
     
-    
-//    self.arrayCurrenTree = [NSMutableArray arrayWithArray:@[@"陈列馆概况",@"钟楼新貌",@"陈列馆展厅",@"领导墨宝",@"藏品大观",@"光影留真",@"嘉宾云集",@"关史研究",@"参观指引",@"",@""]];
-    
-    if (self.arrayCurrenTree == nil && ![internetReachableFoo isReachable]) {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"请确认设备已联接到网络后，点击 '更新' 键重试" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
-        [alert show];
-    }
 //    if (![[UITools getInstancet] hasTheFileInDirectory:WebImageDocmentName] && internetReachableFoo.isReachableViaWWAN) {
 //        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"移动网络下浏览会耗费大量流量，建议切换至wifi环境" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
 //        [alert show];
 //    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (self.arrayCurrenTree == nil && ![[AppData sharedInstance].internetReachableFoo isReachable]) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"请确认设备已联接到网络后，点击 '更新' 键重试" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [alert show];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -97,8 +86,6 @@
     if (IOS_7LAST) {
         self.navigationController.interactivePopGestureRecognizer.delegate = self;
     }
-    [self testInternetConnection];
-    
     
     ChannelTree *fristChannel = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"RootChannel"];
     if (!fristChannel) {
@@ -125,11 +112,10 @@
 
 #pragma mark -actionPerform
 - (void)updateTree:(id)sender {
-    if (internetReachableFoo.isReachable) {////有网络
+    if ([AppData sharedInstance].internetReachableFoo.isReachable) {////有网络
         [self loadDate];
     } else {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请确定已联接到网后再试" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
-        [alert show];
+        [[UITools getInstancet] showAlertViewTitle:@"提示" message:@"请确定已联接到网后再试"];
     }
 }
 
@@ -140,26 +126,8 @@
 }
 
 #pragma mark - netWork
-- (void)testInternetConnection
-{
-    internetReachableFoo = [Reachability reachabilityWithHostname:@"www.baidu.com"];
-    internetReachableFoo.reachableBlock = ^(Reachability*reach) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Yayyy, we have the interwebs!");
-        });
-    };
-    // Internet is not reachable
-    internetReachableFoo.unreachableBlock = ^(Reachability*reach)
-    {
-        // Update the UI on the main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Someone broke the internet :(");
-        });
-    };
-    [internetReachableFoo startNotifier];
-}
-
 - (void)loadDate {
+    MBProgressHUD *hud = [[UITools getInstancet] showLoadingViewAddToView:self.view autoHide:NO];
     [RequestWrapper getRequestWithURL:REQUEST_CHANNEL_URL_STR
                     withParameters:nil
                            success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
@@ -178,12 +146,12 @@
                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                    [self.controllerView reloadData];
                                });
+                               [hud hide:YES];
+                               [[UITools getInstancet] showMessageToView:self.view message:@"加载完成" autoHide:YES];
                            }
                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:NO];
-//                               hud.mode = MBProgressHUDModeText;
-//                               hud.labelText = @"请求出错";
-//                               [hud hide:YES afterDelay:1.5f];
+                               [hud hide:YES];
+                               [[UITools getInstancet] showMessageToView:self.view message:@"请求出错" autoHide:YES];
                            }];
 }
 
@@ -273,21 +241,24 @@
 #pragma mark -
 - (void)checkChannelContentFormServer:(NSString *)channelID
 {
+    if (![AppData sharedInstance].internetReachableFoo.isReachable) {
+        [[UITools getInstancet] showAlertViewTitle:@"提示" message:@"请确定已联接到网后再试"];
+        return;
+    }
+    MBProgressHUD *hud = [[UITools getInstancet] showLoadingViewAddToView:self.view autoHide:NO];
     NSLog(@"%@",REQUEST_CONTENT_URL_STR(channelID));
     [RequestWrapper getRequestWithURL:REQUEST_CONTENT_URL_STR(channelID)
                        withParameters:nil
                               success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-                                  NSString *responsString = operation.responseString;
-                                 arrayLeafs = [self analysisDataFormJsonString:responsString];
+                                NSString *responsString = operation.responseString;
+                                arrayLeafs = [self analysisDataFormJsonString:responsString];
                                 [[NSUserDefaults standardUserDefaults] rm_setCustomObject:arrayLeafs forKey:LEAF_USER_DEFAULT(channelID)];
                                 [self performSegueWithIdentifier:@"MainPushToLeafVC" sender:self];
+                                [hud hide:YES];
                               }
                               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                                  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:NO];
-//                                  hud.mode = MBProgressHUDModeText;
-//                                  hud.labelText = @"请求出错";
-//                                  [hud hide:YES afterDelay:1.5f];
-//                                  NSLog(@"获取数据 fault");
+                                  [hud hide:YES];
+                                  [[UITools getInstancet] showMessageToView:self.view message:@"请求出错" autoHide:YES];
                               }];
 }
 

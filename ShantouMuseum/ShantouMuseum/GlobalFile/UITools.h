@@ -17,10 +17,7 @@
 
 - (void)showAutoDismissAlretView:(NSString *)message Timer:(CGFloat)time;
 + (UIImage *)imageWithName:(NSString *)name andType:(NSString *)type;
-
-+ (void)setNavigationLeftButtonTitle:(NSString *)leftBtnStr leftAction:(SEL)action rightBtnStr:(NSString *)rightBtnStr rightAction:(SEL)rightAction rightBtnSelected:(NSString *)rightBtnStateName navigationTitleStr:(NSString *)title forViewController:(UIViewController *)controller;
-
-+ (void)navigationBackButtonTitle:(NSString *)backButtonTitle action:(SEL)action target:(UIViewController *)viewController;
+- (void)showAlertViewTitle:(NSString *)title message:(NSString *)msg;
 
 #pragma UIDate
 - (BOOL)hasTheFileInDirectory:(NSString *)documentName ;
@@ -30,4 +27,7 @@
 + (NSString *)getImageNameForContentImg:(NSString *)imageUrl;
 + (NSString *)getSavePathFormLeafNod:(ChannelTree *)leafNod;
 
+- (void)showMessageToView:(UIView *)view message:(NSString *)message;
+- (MBProgressHUD *)showMessageToView:(UIView *)view message:(NSString *)message autoHide:(BOOL)autoHide;
+- (MBProgressHUD *)showLoadingViewAddToView:(UIView *)view autoHide:(BOOL)autoHide;
 @end

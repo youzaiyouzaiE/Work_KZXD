@@ -90,6 +90,11 @@
 #pragma mark - 从网络请求Leaf 里的数据
 - (void)checkChannelContentFormServer:(NSString *)channelID
 {
+    if (![AppData sharedInstance].internetReachableFoo.isReachable) {
+        [[UITools getInstancet] showAlertViewTitle:@"提示" message:@"请确定已联接到网后再试"];
+        return;
+    }
+    MBProgressHUD *hud = [[UITools getInstancet] showLoadingViewAddToView:self.view autoHide:NO];
     NSLog(@"%@",REQUEST_CONTENT_URL_STR(channelID));
     [RequestWrapper getRequestWithURL:REQUEST_CONTENT_URL_STR(channelID)
                        withParameters:nil
@@ -98,8 +103,11 @@
                                   arrayContentNodes = [self analysisDataFormJsonString:responsString];
                                   [[NSUserDefaults standardUserDefaults] rm_setCustomObject:arrayContentNodes forKey:LEAF_USER_DEFAULT(channelID)];
                                   [self performSegueWithIdentifier:@"TrunkPushToLeafVC" sender:self];
+                                  [hud hide:YES];
                               }
                               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                  [hud hide:YES];
+                                  [[UITools getInstancet] showMessageToView:self.view message:@"请求出错" autoHide:YES];
                                   NSLog(@"获取数据 fault");
                               }];
 }
