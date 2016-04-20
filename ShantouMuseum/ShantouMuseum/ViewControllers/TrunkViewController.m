@@ -144,5 +144,9 @@
     }
 }
 
+- (void)dealloc
+{
+     NSLog(@"me dealloced");
+}
 
 @end

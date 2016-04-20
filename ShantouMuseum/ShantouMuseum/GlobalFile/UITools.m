@@ -97,8 +97,8 @@ SHARE_INSTANCET(UITools)
     NSString *pathName = [paths[0] stringByAppendingPathComponent:path];
     if ([[NSFileManager defaultManager] fileExistsAtPath:pathName]) {
         NSArray *sourceArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:pathName error:nil];
-        NSMutableArray *mutableArray = [NSMutableArray array];
-        mutableArray = [NSMutableArray arrayWithArray:sourceArray];
+//        NSMutableArray *mutableArray = [NSMutableArray array];
+        NSMutableArray *mutableArray = [NSMutableArray arrayWithArray:sourceArray];
         return mutableArray;
     } else
         return nil;

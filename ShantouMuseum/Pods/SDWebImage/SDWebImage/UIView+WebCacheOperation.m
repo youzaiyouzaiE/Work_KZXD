@@ -22,7 +22,7 @@ static char loadOperationKey;
     objc_setAssociatedObject(self, &loadOperationKey, operations, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return operations;
 }
-
+// 若这个key对应的操作本来就有且正在执行，那么先将这个操作取消，并将它移除
 - (void)sd_setImageLoadOperation:(id)operation forKey:(NSString *)key {
     [self sd_cancelImageLoadOperationWithKey:key];
     NSMutableDictionary *operationDictionary = [self operationDictionary];
