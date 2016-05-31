@@ -57,11 +57,6 @@
 
 }
 
-- (void)loadView {
-    [super loadView];
-
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStylePlain target:nil action:nil];
