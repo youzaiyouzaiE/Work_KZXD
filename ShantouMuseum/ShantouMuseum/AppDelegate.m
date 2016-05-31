@@ -15,7 +15,7 @@
 
 @implementation AppDelegate
 
-////just test commit
+////just test
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [AppData sharedInstance];
