@@ -15,7 +15,7 @@
 
 @implementation AppDelegate
 
-////just test marge in develop
+////just test marge in Text Merge
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [AppData sharedInstance];
