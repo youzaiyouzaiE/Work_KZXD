@@ -15,7 +15,8 @@
 
 @implementation AppDelegate
 
-////just test merge in develop git merge branch
+////just test marge
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [AppData sharedInstance];
